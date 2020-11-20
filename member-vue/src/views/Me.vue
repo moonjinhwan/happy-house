@@ -76,7 +76,8 @@ export default {
     axios
       .get(`${SERVER_URL}/user/info`)
       .then((response) => {
-        console.log(response)
+        console.log('me.vue');
+        console.log(response);
         this.user = response.data.info;
       })
       .catch(() => {

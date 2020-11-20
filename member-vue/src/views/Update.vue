@@ -57,7 +57,7 @@
           <hr class="my-4" />
 
           <b-button variant="primary" href="#" class="mr-1" @click="update">정보수정</b-button>
-          <b-button variant="danger" href="#"  @click="del">회원탈퇴</b-button>
+          <b-button variant="danger" href="#" @click="del">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -77,13 +77,10 @@ export default {
     };
   },
   created() {
-
     axios
-      .get(`${SERVER_URL}/user/info?timestamp=${new Date().getTime()}`)
+      .get(`${SERVER_URL}/user/info`)
       .then((response) => {
-        
         this.user = response.data.info;
-        //console.log(response.data.data)
       })
       .catch(() => {
         this.$store.dispatch('LOGOUT').then(() => this.moveMain());
@@ -108,7 +105,7 @@ export default {
           alert('수정 처리시 에러가 발생했습니다.');
         });
     },
-    del: function(){
+    del: function() {
       axios
         .delete(`${SERVER_URL}/user/${this.user.userid}`)
         .then(() => {
@@ -117,7 +114,7 @@ export default {
         })
         .catch(() => {
           alert('삭제 시 에러가 발생했습니다.');
-        })
+        });
     },
     moveMain() {
       this.$router.replace('/');
