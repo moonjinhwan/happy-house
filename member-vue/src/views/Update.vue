@@ -82,8 +82,8 @@ export default {
       .get(`${SERVER_URL}/user/info?timestamp=${new Date().getTime()}`)
       .then((response) => {
         
-        this.user = response.data.data;
-        console.log(response.data.data)
+        this.user = response.data.info;
+        //console.log(response.data.data)
       })
       .catch(() => {
         this.$store.dispatch('LOGOUT').then(() => this.moveMain());

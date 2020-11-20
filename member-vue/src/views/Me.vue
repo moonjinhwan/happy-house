@@ -77,7 +77,7 @@ export default {
       .get(`${SERVER_URL}/user/info`)
       .then((response) => {
         console.log(response)
-        this.user = response.data.user;
+        this.user = response.data.info;
       })
       .catch(() => {
         this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/'));
