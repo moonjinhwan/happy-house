@@ -26,22 +26,23 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@PostMapping("/confirm/login")
-	public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDto memberDto, HttpServletResponse response, HttpSession session) {
+	public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDto memberDto, HttpServletResponse response,
+			HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		try {
 			MemberDto loginUser = memberService.login(memberDto);
-			
-			if(loginUser != null) {
+
+			if (loginUser != null) {
 //				jwt.io에서 확인
 //				로그인 성공했다면 토큰을 생성한다.
 				String token = jwtService.create(loginUser);
 				logger.trace("로그인 토큰정보 : {}", token);
-				
+
 //				토큰 정보는 response의 헤더로 보내고 나머지는 Map에 담는다.
 //				response.setHeader("auth-token", token);
 				resultMap.put("auth-token", token);
@@ -84,7 +85,7 @@ public class MemberController {
 //		}
 //		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 //	}
-	
+
 	@GetMapping("/info")
 	public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest req) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -92,15 +93,15 @@ public class MemberController {
 		System.out.println(">>>>>> " + jwtService.get(req.getHeader("auth-token")));
 		try {
 			// 사용자에게 전달할 정보이다.
-			//String info = memberService.getServerInfo();
-			//MemberDto info = memberService.selectOne();
-			
+			// String info = memberService.getServerInfo();
+			// MemberDto info = memberService.selectOne();
+
 			resultMap.putAll(jwtService.get(req.getHeader("auth-token")));
-			
-			Map<String, Object> temp =  (Map<String, Object>) resultMap.get("user");
-			MemberDto info = memberService.selectOne((String)temp.get("userid"));
-			resultMap.put("data", info);
-			
+
+			Map<String, Object> temp = (Map<String, Object>) resultMap.get("user");
+			MemberDto info = memberService.selectOne((String) temp.get("userid"));
+			resultMap.put("info", info);
+
 //			resultMap.put("status", true)
 //			resultMap.put("info", info);
 			status = HttpStatus.ACCEPTED;
@@ -111,38 +112,55 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
-	//수정
+
+	// 수정
 	@PutMapping("/update")
-	public ResponseEntity<Map<String, Object>> updateInfo(@RequestBody MemberDto memberDto, HttpServletResponse response, HttpServletRequest req){
-		
+	public ResponseEntity<Map<String, Object>> updateInfo(@RequestBody MemberDto memberDto,
+			HttpServletResponse response, HttpServletRequest req) {
+
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
-		try {		
-			System.out.println(">>>>업데이트 "+memberDto.toString());
+		try {
+			System.out.println(">>>>업데이트 " + memberDto.toString());
 			memberService.update(memberDto);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			resultMap.put("message", "로그인 실패");
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
-	//삭제
+
+	// 삭제
 	@DeleteMapping("{id}")
-	public ResponseEntity<Map<String, Object>> deleteInfo(@PathVariable("id") String userid, HttpServletResponse response, HttpServletRequest req){
-		System.out.println(userid);
+	public ResponseEntity<Map<String, Object>> deleteInfo(@PathVariable("id") String userid,
+			HttpServletResponse response, HttpServletRequest req) {
+		// System.out.println(userid);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
-		try {		
-			
+		try {
+
 			memberService.delete(userid);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("로그인실패");
 			resultMap.put("message", "로그인 실패");
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	//조인
+
+	// 회원가입
+	@PostMapping("/confirm/join")
+	public ResponseEntity<Map<String, Object>> joinInfo(@RequestBody MemberDto memberDto, HttpServletResponse response){
+		System.out.println(memberDto.toString());
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		try {		
+			memberService.join(memberDto);
+		}catch (Exception e) {
+			System.out.println("회원가입 실패");
+			resultMap.put("message", "회원가입 실패");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }

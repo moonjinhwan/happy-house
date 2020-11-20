@@ -40,4 +40,10 @@ public class MemberServiceImpl implements MemberService {
 	public boolean delete(String userid) throws Exception {
 		return sqlSession.getMapper(MemberMapper.class).delete(userid)==1;
 	}
+	
+	@Override
+	@Transactional
+	public boolean join(MemberDto memberDto) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).join(memberDto)==1;
+	}
 }

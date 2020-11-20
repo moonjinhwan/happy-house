@@ -21,10 +21,16 @@
 		where userid = #{userid}
 	</delete>
 	
+	<!-- 조인 -->
+	<insert id="join" parameterType="MemberDto">
+		insert into ssafy_member(userid, username, userpwd, email, address)
+		values(#{userid}, #{username}, #{email},#{userpwd}, #{address});
+	</insert>
+	
+	<!-- 하나만 -->
 	<select id="selectOne" parameterType="string" resultType="MemberDto">
 		select username, userid, email, address, joindate
 		from ssafy_member
 		where userid = #{uesrid}
 	</select>
-	
 </mapper>
