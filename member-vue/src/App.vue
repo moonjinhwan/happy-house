@@ -67,9 +67,11 @@ export default {
     onClickLogout() {
       this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/').catch(() => {}));
     },
+    join: function() {
+      this.$$router.replace('/');
+    },
   },
 };
-
 </script>
 <style>
 #app {
