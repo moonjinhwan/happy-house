@@ -5,6 +5,8 @@ import Login from "../views/Login.vue";
 import Update from "../views/Update.vue";
 import Me from "../views/Me.vue";
 import store from "../store";
+import Join from "../views/Join.vue";
+// import { join } from "core-js/fn/array";
 
 Vue.use(VueRouter);
 
@@ -44,6 +46,11 @@ const routes = [
     component: Me,
     beforeEnter: requireAuth()
   },
+  {
+    path: "/join",
+    name: "Join",
+    component: Join,
+  }
 ];
 
 const router = new VueRouter({

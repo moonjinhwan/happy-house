@@ -24,7 +24,7 @@
               ></b-form-input>
             </b-form-group>
             <b-button type="button" variant="primary" class="m-1" @click="login">로그인</b-button>
-            <b-button type="button" variant="success" class="m-1">회원가입</b-button>
+            <b-button type="button" variant="success" class="m-1" @click="join">회원가입</b-button>
           </b-form>
         </b-card>
       </b-col>
@@ -63,6 +63,9 @@ export default {
         .dispatch('LOGIN', this.user)
         .then(() => this.$router.replace(`/${this.nextRoute}`)) //주소를 변경
         .catch(({ message }) => (this.msg = message));
+    },
+    join: function() {
+      this.$router.replace('join');
     },
   },
 };
