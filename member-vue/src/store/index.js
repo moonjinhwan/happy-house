@@ -40,10 +40,10 @@ export default new Vuex.Store({
       return axios
         .post(`${SERVER_URL}/user/confirm/login`, user)
         .then((response) => {
-          context.commit("LOGIN", response.data);
+          context.commit("LOGIN", response.data);//데이터를 받고 초기화과정
           axios.defaults.headers.common[
             "auth-token"
-          ] = `${response.data["auth-token"]}`;
+          ] = `${response.data["auth-token"] }`;
         });
     },
     LOGOUT(context) {

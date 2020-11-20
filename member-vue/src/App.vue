@@ -20,26 +20,17 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto" v-if="getAccessToken">
             <b-nav-item
-              ><b-avatar
-                variant="primary"
-                v-text="getUserId.charAt(0).toUpperCase()"
-              ></b-avatar
+              ><b-avatar variant="primary" v-text="getUserId.charAt(0).toUpperCase()"></b-avatar
               >{{ getUserName }}({{ getUserId }})님 환영합니다.</b-nav-item
             >
-            <b-nav-item
-              ><router-link to="/me">내정보보기</router-link></b-nav-item
-            >
+            <b-nav-item><router-link to="/me">내정보보기</router-link></b-nav-item>
             <b-nav-item @click.prevent="onClickLogout">로그아웃</b-nav-item>
             <!-- <b-nav-item href="/me">내정보보기</b-nav-item>
             <b-nav-item href="/logout">로그아웃</b-nav-item> -->
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto" v-else>
-            <b-nav-item>
-              <router-link to="/login">로그인</router-link></b-nav-item
-            >
-            <b-nav-item
-              ><router-link to="/join">회원가입</router-link></b-nav-item
-            >
+            <b-nav-item> <router-link to="/login">로그인</router-link></b-nav-item>
+            <b-nav-item><router-link to="/join">회원가입</router-link></b-nav-item>
             <!-- <b-nav-item href="/login">로그인</b-nav-item>
             <b-nav-item href="/join">회원가입</b-nav-item> -->
           </b-navbar-nav>
@@ -51,35 +42,34 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import Vue from 'vue';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 //mapGetters 등록
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      isLogin: false
+      isLogin: false,
     };
   },
   computed: {
-    ...mapGetters(["getAccessToken", "getUserId", "getUserName"])
+    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName']),
   },
   methods: {
     onClickLogout() {
-      this.$store
-        .dispatch("LOGOUT")
-        .then(() => this.$router.replace("/").catch(() => {}));
-    }
-  }
+      this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/').catch(() => {}));
+    },
+  },
 };
+
 </script>
 <style>
 #app {

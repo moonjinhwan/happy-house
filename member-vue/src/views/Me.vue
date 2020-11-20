@@ -46,8 +46,7 @@
           </b-container>
           <hr class="my-4" />
 
-          <b-button variant="primary" href="#" class="mr-1">정보수정</b-button>
-          <b-button variant="danger" href="#">회원탈퇴</b-button>
+          <b-button variant="primary" @click="update" class="mr-1">정보수정</b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -63,26 +62,32 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   data() {
     return {
-      user: null
+      user: null,
     };
   },
   created() {
     axios
       .get(`${SERVER_URL}/user/info`)
       .then((response) => {
+        console.log(response)
         this.user = response.data.user;
       })
       .catch(() => {
-        this.$store.dispatch("LOGOUT").then(() => this.$router.replace("/"));
+        this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/'));
       });
-  }
+  },
+  methods: {
+    update: function() {
+      this.$router.replace('update');
+    },
+  },
 };
 </script>
 

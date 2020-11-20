@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import Update from "../views/Update.vue";
 import Me from "../views/Me.vue";
 import store from "../store";
 
@@ -33,11 +34,16 @@ const routes = [
     component: Login
   },
   {
+    path: "/update",
+    name: "update",
+    component: Update,
+  },
+  {
     path: "/me",
     name: "Me",
     component: Me,
     beforeEnter: requireAuth()
-  }
+  },
 ];
 
 const router = new VueRouter({
