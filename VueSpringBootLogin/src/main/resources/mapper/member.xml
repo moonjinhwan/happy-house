@@ -6,31 +6,31 @@
 
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
 		select username, userid, email, address, joindate
-		from ssafy_member
+		from member
 		where userid = #{userid} and userpwd = #{userpwd}
 	</select>
 
 	<update id="update" parameterType="MemberDto">
-		update ssafy_member 
+		update member 
 		set username=#{username}, email=#{email}, address= #{address}  
 		where userid = #{userid};
 	</update>
 	
 	<delete id="delete" parameterType="string">
-		delete from ssafy_member
+		delete from member
 		where userid = #{userid}
 	</delete>
 	
 	<!-- 조인 -->
 	<insert id="join" parameterType="MemberDto">
-		insert into ssafy_member(userid, username, userpwd, email, address)
+		insert into member(userid, username, userpwd, email, address)
 		values(#{userid}, #{username}, #{email},#{userpwd}, #{address});
 	</insert>
 	
 	<!-- 하나만 -->
 	<select id="selectOne" parameterType="string" resultType="MemberDto">
 		select username, userid, email, address, joindate
-		from ssafy_member
+		from member
 		where userid = #{uesrid}
 	</select>
 </mapper>
