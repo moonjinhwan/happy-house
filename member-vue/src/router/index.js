@@ -6,6 +6,7 @@ import Update from "../views/Update.vue";
 import Me from "../views/Me.vue";
 import store from "../store";
 import Join from "../views/Join.vue";
+import SearchApt from "../views/SearchApt.vue";
 // import { join } from "core-js/fn/array";
 
 Vue.use(VueRouter);
@@ -50,6 +51,11 @@ const routes = [
     path: "/join",
     name: "Join",
     component: Join,
+  },
+  {
+    path: "/searchApt",
+    name: 'searchApt',
+    component: SearchApt,
   }
 ];
 
