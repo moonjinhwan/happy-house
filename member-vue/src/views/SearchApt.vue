@@ -1,20 +1,20 @@
 <template>
   <div>
     <b-jumbotron header="Search House"> </b-jumbotron>
-    <table class="table mt-2">
+    <table class="table">
       <thead>
         <tr>
-          <th>번호</th>
           <th>법정동</th>
           <th>아파트이름</th>
           <th>지번</th>
-          <th>지역코드</th>
-          <th>위도</th>
-          <th>경도</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <!-- apt list 출력 -->
+      <tbody>
+        <apt-list />
+      </tbody>
     </table>
+    <!-- google map 부분  -->
     <div id="app">
       <google-map />
     </div>
@@ -23,11 +23,13 @@
 
 <script>
 import GoogleMap from '../components/GoogleMap';
+import AptList from '../components/AptList';
 
 export default {
   name: 'App',
   components: {
     GoogleMap,
+    AptList,
   },
 };
 </script>

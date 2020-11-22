@@ -10,7 +10,7 @@
               width="60px"
               alt="Kitten"
             />
-            SSAFY</router-link
+            HAPPY HOUSE</router-link
           ></b-navbar-brand
         >
         <!-- <b-navbar-brand href="/">SSAFY</b-navbar-brand> -->

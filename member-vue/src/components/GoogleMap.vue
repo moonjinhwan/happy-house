@@ -14,39 +14,50 @@
         </option>
       </select>
       읍면동 :
-      <select v-model="selectDong">
+      <select v-model="selectDong" @change="getInfo">
         <option v-for="(dong, index) in donglist" :value="dong.dong" v-bind:key="index">
           {{ dong.dong }}
         </option>
       </select>
-      <label>
+      <!-- <label>
         <gmap-autocomplete @place_changed="setPlace"> </gmap-autocomplete>
         <button @click="addMarker">Add</button>
-      </label>
+      </label> -->
       <br />
     </div>
     <br />
-    <gmap-map :center="center" :zoom="12" style="width:100%;  height: 800px;">
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center = m.position"
-      ></gmap-marker>
-    </gmap-map>
+    <div class="row">
+      <div class="col">
+        <!-- 구글맵 출력 -->
+        <gmap-map :center="center" :zoom="12" style="width:100%;  height: 100%;">
+          <gmap-marker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            @click="center = m.position"
+          ></gmap-marker>
+        </gmap-map>
+      </div>
+      <!-- 아파트 디테일 출력 -->
+      <div class="col">
+        <apt-detail />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import AptDetail from './AptDetail.vue';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
+  components: { AptDetail },
   name: 'GoogleMap',
   data() {
     return {
       // default to montreal to keep it simple
       // change this to whatever makes sense
-      center: { lat: 45.508, lng: -73.587 },
+      center: { lat: 37.5567056, lng: 127.0196111 },
       markers: [],
       places: [],
       currentPlace: null,
@@ -115,10 +126,43 @@ export default {
         .get(`${SERVER_URL}/map/dong/${this.selectGugun}`)
         .then((response) => {
           this.donglist = response.data.dongInfo;
+
           console.log(this.donglist);
         })
         .catch(() => {
           alert('동코드 에러가 발생했습니다.');
+        });
+    },
+    // saveDongCode: function() {
+    //   this.$store.commit('DONGCODE', this.selectDong);
+    // },
+    // sendDongCode: function() {
+    //   const API_KEY =
+    //     '9Xo0vlglWcOBGUDxH8PPbuKnlBwbWU6aO7%2Bk3FV4baF9GXok1yxIEF%2BIwr2%2B%2F%2F4oVLT8bekKU%2Bk9ztkJO0wsBw%3D%3D';
+    //   const API_URL =
+    //     'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?LAWD_CD=' +
+    //     this.selectDong +
+    //     '&DEAL_YMD=202010&serviceKey=' +
+    //     API_KEY;
+
+    //   axios
+    //     .get(API_URL)
+    //     .then((response) => {
+    //       console.log(response); //apt list
+    //       this.$store.commit('APTLIST', response.data.response.body.items.item);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
+    getInfo: function() {
+      axios
+        .get(`${SERVER_URL}/map/houseinfo/${this.selectDong}`)
+        .then((response) => {
+          this.$store.commit('APTLIST', response.data.houseInfo);
+        })
+        .catch(() => {
+          alert('아파트 리스트를 받는 중, 에러가 발생했습니다.');
         });
     },
   },
