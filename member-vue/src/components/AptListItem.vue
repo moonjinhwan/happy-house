@@ -33,7 +33,7 @@ export default {
 
       axios
         .post(`${SERVER_URL}/map/detail`, {
-          code: this.aptInfo.code,
+          dong: this.aptInfo.dong,
           aptName: this.aptInfo.aptName,
         })
         .then((response) => {
