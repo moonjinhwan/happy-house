@@ -20,4 +20,15 @@
 		where code = #{guguncode}
 		ORDER BY dong
 	</select>
+	
+	<select id="getHouseInfo" resultType="HouseInfoDto" parameterType="String">
+		SELECT no, dong, AptName, code, jibun, lat, lng FROM houseinfo WHERE dong = #{dongName}
+		ORDER BY AptName
+	</select>
+	
+	<select id="getDetail" resultType="map" parameterType="map">
+		SELECT dong, AptName, dealAmount, area, dealYear
+		FROM housedeal
+		WHERE code = #{code} and AptName like concat('%',#{aptName},'%');
+	</select>
 </mapper>

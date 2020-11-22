@@ -1,6 +1,7 @@
 package com.ssafy.vue.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,13 @@ public class SidoGugunDongService {
 	
 	public List<HouseInfoDto> getDongCode(String guguncode) throws Exception {
 		return sqlSession.getMapper(SidoGugunDongMapper.class).getDongCode(guguncode);
+	}
+	
+	public List<HouseInfoDto> getHouseInfo(String dongName) throws Exception {
+		return sqlSession.getMapper(SidoGugunDongMapper.class).getHouseInfo(dongName);
+	}
+	
+	public List<Map<String, Object>> getDetail( Map<String ,Object> info) throws Exception{
+		return sqlSession.getMapper(SidoGugunDongMapper.class).getDetail(info);
 	}
 }

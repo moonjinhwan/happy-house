@@ -1,6 +1,7 @@
 package com.ssafy.vue.model.mapper;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,4 +15,5 @@ public interface MemberMapper {
 	public int delete(String userid) throws SQLException;
 	public MemberDto selectOne(String userid) throws SQLException;
 	public int join(MemberDto memberDto) throws SQLException;
+
 }
