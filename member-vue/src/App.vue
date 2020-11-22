@@ -10,11 +10,13 @@
               width="60px"
               alt="Kitten"
             />
-            SSAFY</router-link
+            HAPPY HOUSE</router-link
           ></b-navbar-brand
         >
         <!-- <b-navbar-brand href="/">SSAFY</b-navbar-brand> -->
-
+        <b-navbar-nav>
+          <b-nav-item><router-link to="/searchApt">아파트 검색</router-link></b-nav-item>
+        </b-navbar-nav>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>

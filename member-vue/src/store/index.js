@@ -10,7 +10,10 @@ export default new Vuex.Store({
   state: {
     accessToken: null,
     userId: "",
-    userName: ""
+    userName: "",
+    aptList: "",
+    dongCode: "",
+    aptDetail: [],
   },
   getters: {
     getAccessToken(state) {
@@ -21,7 +24,13 @@ export default new Vuex.Store({
     },
     getUserName(state) {
       return state.userName;
-    }
+    },
+    getAptList(state) {
+      return state.aptList;
+    },
+    getAptDetail(state) {
+      return state.aptDetail;
+    },
   },
   mutations: {
     LOGIN(state, payload) {
@@ -34,6 +43,15 @@ export default new Vuex.Store({
       state.accessToken = null;
       state.userId = "";
       state.userName = "";
+    },
+    APTLIST: function (state, payload) {
+      state.aptList = payload;
+    },
+    DONGCODE: function (state, payload) {
+      state.dongCode = payload;
+    },
+    APTDETAIL: function(state, payload) {
+      state.aptDetail = payload;
     }
   },
   actions: {
