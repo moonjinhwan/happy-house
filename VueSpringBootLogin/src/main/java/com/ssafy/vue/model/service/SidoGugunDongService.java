@@ -26,4 +26,8 @@ public class SidoGugunDongService {
 	public List<HouseInfoDto> getDongCode(String guguncode) throws Exception {
 		return sqlSession.getMapper(SidoGugunDongMapper.class).getDongCode(guguncode);
 	}
+	
+	public List<HouseInfoDto> getHouseInfo(String dongName) throws Exception {
+		return sqlSession.getMapper(SidoGugunDongMapper.class).getHouseInfo(dongName);
+	}
 }

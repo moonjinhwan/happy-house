@@ -77,4 +77,23 @@ public class MapController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@GetMapping("/houseinfo/{dongName}")
+	public ResponseEntity<Map<String, Object>> getInfo(@PathVariable String dongName , HttpServletRequest req) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		System.out.println("동이름"+dongName);
+		HttpStatus status = HttpStatus.ACCEPTED;
+		
+		try {
+			List<HouseInfoDto> list = service.getHouseInfo(dongName);
+			System.out.println(list.size());
+			resultMap.put("houseInfo", list);
+			status = HttpStatus.ACCEPTED;
+		} catch (RuntimeException e) {
+			
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }
