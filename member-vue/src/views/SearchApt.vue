@@ -2,13 +2,6 @@
   <div>
     <b-jumbotron header="Search House"> </b-jumbotron>
     <table class="table">
-      <thead>
-        <tr>
-          <th>법정동</th>
-          <th>아파트이름</th>
-          <th>지번</th>
-        </tr>
-      </thead>
       <!-- apt list 출력 -->
       <tbody>
         <apt-list />

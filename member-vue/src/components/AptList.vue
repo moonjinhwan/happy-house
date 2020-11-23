@@ -1,10 +1,7 @@
 <template>
-  <table>
-    <tr>
-      <apt-list-item v-for="(apt, index) in getAptList" :key="index" :aptInfo="apt">
-      </apt-list-item>
-    </tr>
-  </table>
+  <span>
+    <apt-list-item v-for="(apt, index) in getAptList" :key="index" :aptInfo="apt"> </apt-list-item>
+  </span>
 </template>
 
 <script>
