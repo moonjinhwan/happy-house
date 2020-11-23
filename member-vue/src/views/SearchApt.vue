@@ -1,12 +1,13 @@
 <template>
   <div>
     <b-jumbotron header="Search House"> </b-jumbotron>
-    <table class="table">
-      <!-- apt list 출력 -->
-      <tbody>
-        <apt-list />
-      </tbody>
-    </table>
+    <div class="container">
+      <table class="table d-flex justify-content-center">
+        <tbody>
+          <apt-list />
+        </tbody>
+      </table>
+    </div>
     <!-- google map 부분  -->
     <div id="app">
       <google-map />
