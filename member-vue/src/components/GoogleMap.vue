@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col">
         <!-- 구글맵 출력 -->
-        <gmap-map :center="center" :zoom="12" style="width:100%;  height: 100%;">
+        <gmap-map :center="center" :zoom="12" style="width:100%;  height: 500px;">
           <gmap-marker
             :key="index"
             v-for="(m, index) in markers"
