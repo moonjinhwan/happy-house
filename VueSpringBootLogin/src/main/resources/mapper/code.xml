@@ -29,6 +29,6 @@
 	<select id="getDetail" resultType="map" parameterType="map">
 		SELECT dong, AptName, dealAmount, area, dealYear
 		FROM housedeal
-		WHERE code = #{code} and AptName like concat('%',#{aptName},'%');
+		WHERE dong = #{dong} and AptName like concat('%',#{aptName},'%');
 	</select>
 </mapper>

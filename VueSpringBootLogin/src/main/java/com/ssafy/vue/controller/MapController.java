@@ -101,7 +101,7 @@ public class MapController {
 	@PostMapping("/detail")
 	public ResponseEntity<Map<String, Object>> getDetail(@RequestBody Map<String, Object> info, HttpServletRequest req) throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();
-		System.out.println(">>>>>>>>>>>>>>>>"+info.get("code"));
+		System.out.println(">>>>>>>>>>>>>>>>"+info.get("dong"));
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {
 			List<Map<String, Object>> list = service.getDetail(info);
