@@ -35,9 +35,11 @@
             v-for="(m, index) in markers"
             :position="m.position"
             @click="center = m.position"
+            :icon="m.icon"
           ></gmap-marker>
         </gmap-map>
       </div>
+
       <!-- 아파트 디테일 출력 -->
       <div class="col">
         <apt-detail />
@@ -59,10 +61,13 @@ export default {
       // change this to whatever makes sense
       center: { lat: 37.5567056, lng: 127.0196111 },
       markers: [
-        // {
-        //   position: { lat: 37.5567056, lng: 127.0196111 },
-        // }, 여기서 getPonsition을 해온다.
-        //getPosition에서는 경도 위도만 빼와서 푸시한다.
+        {
+          position: {
+            lat: 37.5567056,
+            lng: 127.0196111,
+          },
+          icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
+        },
       ],
       places: [],
       currentPlace: null,
@@ -85,6 +90,7 @@ export default {
       .catch(() => {
         alert('시도코드 에러가 발생했습니다.');
       });
+    //houseInfo 초기화, detail 부분도 초기화
   },
 
   mounted() {
