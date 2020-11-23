@@ -70,7 +70,7 @@ export default {
       this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/').catch(() => {}));
     },
     join: function() {
-      this.$$router.replace('/');
+      this.$router.replace('/');
     },
   },
 };

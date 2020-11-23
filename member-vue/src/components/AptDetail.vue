@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table">
+    <!-- <table class="table">
       <thead>
         <tr>
           <th scope="col">번호</th>
@@ -21,7 +21,8 @@
           <td>{{ info.dealYear }}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
+    <b-table sticky-header :items="getAptDetail" head-variant="light"></b-table>
   </div>
 </template>
 

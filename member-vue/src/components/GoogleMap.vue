@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col">
         <!-- 구글맵 출력 -->
-        <gmap-map :center="center" :zoom="12" style="width:100%;  height: 500px;">
+        <gmap-map :center="center" :zoom="14" style="width:100%;  height: 500px;">
           <gmap-marker
             :key="index"
             v-for="(m, index) in markers"
@@ -58,7 +58,12 @@ export default {
       // default to montreal to keep it simple
       // change this to whatever makes sense
       center: { lat: 37.5567056, lng: 127.0196111 },
-      markers: [],
+      markers: [
+        // {
+        //   position: { lat: 37.5567056, lng: 127.0196111 },
+        // }, 여기서 getPonsition을 해온다.
+        //getPosition에서는 경도 위도만 빼와서 푸시한다.
+      ],
       places: [],
       currentPlace: null,
       sidolist: [],
@@ -160,6 +165,20 @@ export default {
         .get(`${SERVER_URL}/map/houseinfo/${this.selectDong}`)
         .then((response) => {
           this.$store.commit('APTLIST', response.data.houseInfo);
+          //경도 위도 받아서 마커 설정
+          this.markers = [];
+          this.center = {
+            lat: parseFloat(response.data.houseInfo[0].lat),
+            lng: parseFloat(response.data.houseInfo[0].lng),
+          };
+          for (var i = 0; i < response.data.houseInfo.length; i++) {
+            this.markers.push({
+              position: {
+                lat: parseFloat(response.data.houseInfo[i].lat),
+                lng: parseFloat(response.data.houseInfo[i].lng),
+              },
+            });
+          }
         })
         .catch(() => {
           alert('아파트 리스트를 받는 중, 에러가 발생했습니다.');
