@@ -1,37 +1,40 @@
 <template>
   <div>
-    <!-- <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">번호</th>
-          <th scope="col">동</th>
-          <th scope="col">아파트</th>
-          <th scope="col">거래금액</th>
-          <th scope="col">면적</th>
-          <th scope="col">거래년도</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(info, index) in getAptDetail" :key="index">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ info.dong }}</td>
-          <td>{{ info.AptName }}</td>
-          <td>{{ info.dealAmount }}</td>
-          <td>{{ info.area }}</td>
-          <td>{{ info.dealYear }}</td>
-        </tr>
-      </tbody>
-    </table> -->
-    <b-table sticky-header :items="getAptDetail" head-variant="light"></b-table>
+    <b-table
+      sticky-header
+      :items="getAptDetail"
+      head-variant="light"
+      @row-clicked="mypage"
+      hover
+    ></b-table>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import { mapGetters } from 'vuex';
-
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   computed: {
     ...mapGetters(['getAptDetail']),
+  },
+  methods: {
+    mypage(object) {
+      if (this.$store.state.userId == '') {
+        alert('로그인을 해주세요');
+      } else {
+        axios
+          .post(`${SERVER_URL}/user/mypage`, {
+            object,
+          })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
   },
 };
 </script>

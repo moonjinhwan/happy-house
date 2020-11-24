@@ -14,40 +14,48 @@
         </option>
       </select>
       읍면동 :
-      <select v-model="selectDong" @change="getInfo">
+      <select v-model="selectDong" @change="[getInfo(), getPlace()]">
         <option v-for="(dong, index) in donglist" :value="dong.dong" v-bind:key="index">
           {{ dong.dong }}
         </option>
       </select>
-      <input type="checkbox" id="checkbox" v-model="selected" @click="selectChicken" />치킨
-      <!-- <b-form-checkbox-group id="checkbox-group-2" v-model="selected" name="flavour-2">
-        <b-form-checkbox value="chicken">치킨</b-form-checkbox>
-        <b-form-checkbox value="caffe">카페</b-form-checkbox>
-      </b-form-checkbox-group> -->
-      <!-- <label>
-        <gmap-autocomplete @place_changed="setPlace"> </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label> -->
       <br />
+      <b-form-checkbox
+        id="checkbox-1"
+        v-model="status"
+        value="clicked"
+        unchecked-value="unclicked"
+        @change="select"
+      >
+        상권정보 표시
+      </b-form-checkbox>
     </div>
     <br />
+
+    <!-- 구글맵 출력 -->
+    <div>
+      <gmap-map :center="center" :zoom="14" style="width:100%;  height: 500px;">
+        <gmap-marker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          @click="center = m.position"
+          :icon="m.icon"
+        ></gmap-marker>
+      </gmap-map>
+    </div>
+    <!-- 아파트 디테일 출력 -->
     <div class="row">
       <div class="col">
-        <!-- 구글맵 출력 -->
-        <gmap-map :center="center" :zoom="14" style="width:100%;  height: 500px;">
-          <gmap-marker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            @click="center = m.position"
-            :icon="m.icon"
-          ></gmap-marker>
-        </gmap-map>
-      </div>
-
-      <!-- 아파트 디테일 출력 -->
-      <div class="col">
+        <h1>실거래가 정보</h1>
         <apt-detail />
+      </div>
+      <div class="col">
+        <h1>상권 정보</h1>
+        <div>
+          <b-table hover sticky-header :items="placelist" head-variant="light"></b-table>
+        </div>
+        <!-- <place-detail /> -->
       </div>
     </div>
   </div>
@@ -56,13 +64,15 @@
 <script>
 import axios from 'axios';
 import AptDetail from './AptDetail.vue';
+import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   components: { AptDetail },
   name: 'GoogleMap',
   data() {
     return {
-      selected: [],
+      status: '',
+      selected: '',
       // default to montreal to keep it simple
       // change this to whatever makes sense
 
@@ -73,13 +83,19 @@ export default {
       sidolist: [],
       gugunlist: [],
       donglist: [],
+      placelist: [],
       selecSido: '',
       selectGugun: '',
       selectDong: '',
     };
   },
-
+  computed: {
+    ...mapGetters(['getAptList']),
+  },
   created: function() {
+    //초기화하기
+    this.$store.commit('APTLIST', []);
+    this.$store.commit('APTDETAIL', []);
     axios
       .get(`${SERVER_URL}/map/sido`)
       .then((response) => {
@@ -89,7 +105,6 @@ export default {
       .catch(() => {
         alert('시도코드 에러가 발생했습니다.');
       });
-    //houseInfo 초기화, detail 부분도 초기화
   },
 
   mounted() {
@@ -143,35 +158,13 @@ export default {
           alert('동코드 에러가 발생했습니다.');
         });
     },
-    // saveDongCode: function() {
-    //   this.$store.commit('DONGCODE', this.selectDong);
-    // },
-    // sendDongCode: function() {
-    //   const API_KEY =
-    //     '9Xo0vlglWcOBGUDxH8PPbuKnlBwbWU6aO7%2Bk3FV4baF9GXok1yxIEF%2BIwr2%2B%2F%2F4oVLT8bekKU%2Bk9ztkJO0wsBw%3D%3D';
-    //   const API_URL =
-    //     'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?LAWD_CD=' +
-    //     this.selectDong +
-    //     '&DEAL_YMD=202010&serviceKey=' +
-    //     API_KEY;
-
-    //   axios
-    //     .get(API_URL)
-    //     .then((response) => {
-    //       console.log(response); //apt list
-    //       this.$store.commit('APTLIST', response.data.response.body.items.item);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
     getInfo: function() {
       axios
         .get(`${SERVER_URL}/map/houseinfo/${this.selectDong}`)
         .then((response) => {
           this.$store.commit('APTLIST', response.data.houseInfo);
           //경도 위도 받아서 마커 설정
-          this.markers = [];
+
           this.center = {
             lat: parseFloat(response.data.houseInfo[0].lat),
             lng: parseFloat(response.data.houseInfo[0].lng),
@@ -182,7 +175,7 @@ export default {
                 lat: parseFloat(response.data.houseInfo[i].lat),
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
-              // icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
+              icon: 'house.ico',
             });
           }
         })
@@ -190,28 +183,44 @@ export default {
           alert('아파트 리스트를 받는 중, 에러가 발생했습니다.');
         });
     },
-    selectChicken: function() {
+    getPlace: function() {
       axios
         .post(`${SERVER_URL}/map/place`, {
           dongname: this.selectDong,
-          type: 2,
         })
         .then((response) => {
-          console.log(response.data.placeInfo);
-          for (var i = 0; i < response.data.placeInfo.length; i++) {
-            console.log('반복문 돌리고있어요');
-            this.markers.push({
-              position: {
-                lat: parseFloat(response.data.placeInfo[i].lat),
-                lng: parseFloat(response.data.placeInfo[i].lng),
-              },
-              icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
-            });
-          }
+          console.log(response.data);
+          this.placelist = response.data.placeInfo;
         })
         .catch(() => {
           alert('상권정보를 받는 중, 에러가 발생했습니다.');
         });
+    },
+    select: function() {
+      let iconType = ['', 'coffee.ico', 'chicken.ico'];
+      if (this.status == 'clicked') {
+        for (let i = 0; i < this.placelist.length; i++) {
+          console.log(iconType[this.placelist[i].type]);
+          this.markers.push({
+            position: {
+              lat: parseFloat(this.placelist[i].lat),
+              lng: parseFloat(this.placelist[i].lng),
+            },
+            icon: iconType[this.placelist[i].type],
+          });
+        }
+      } else {
+        this.markers.splice(0);
+        for (let i = 0; i < this.$store.state.aptList.length; i++) {
+          this.markers.push({
+            position: {
+              lat: parseFloat(this.$store.state.aptList[i].lat),
+              lng: parseFloat(this.$store.state.aptList[i].lng),
+            },
+            icon: 'house.ico',
+          });
+        }
+      }
     },
   },
 };
