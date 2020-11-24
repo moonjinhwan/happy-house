@@ -11,7 +11,7 @@ export default new Vuex.Store({
     accessToken: null,
     userId: "",
     userName: "",
-    aptList: "",
+    aptList: [],
     dongCode: "",
     aptDetail: [],
   },

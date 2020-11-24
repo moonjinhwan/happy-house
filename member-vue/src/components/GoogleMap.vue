@@ -72,6 +72,9 @@ export default {
   },
 
   created: function() {
+    //초기화하기
+    this.$store.commit('APTLIST', []);
+    this.$store.commit('APTDETAIL', []);
     axios
       .get(`${SERVER_URL}/map/sido`)
       .then((response) => {
@@ -81,7 +84,6 @@ export default {
       .catch(() => {
         alert('시도코드 에러가 발생했습니다.');
       });
-    //houseInfo 초기화, detail 부분도 초기화
   },
 
   mounted() {
