@@ -174,6 +174,7 @@ export default {
                 lat: parseFloat(response.data.houseInfo[i].lat),
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
+              icon: 'house.ico'
               // icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
             });
           }
