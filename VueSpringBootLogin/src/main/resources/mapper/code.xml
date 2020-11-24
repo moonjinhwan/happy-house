@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="getHouseInfo" resultType="HouseInfoDto" parameterType="String">
-		SELECT no, dong, AptName, code, jibun, lat, lng 
+		SELECT no, dong, AptName, buildYear,code, jibun, lat, lng 
 		FROM houseinfo WHERE dong = #{dongName}
 		ORDER BY AptName
 	</select>
