@@ -3,51 +3,30 @@
     <div>
       시도 :
       <select v-model="selecSido" @change="getgugun">
-        <option
-          v-for="(sido, index) in sidolist"
-          :value="sido.sido_code"
-          v-bind:key="index"
-        >
+        <option v-for="(sido, index) in sidolist" :value="sido.sido_code" v-bind:key="index">
           {{ sido.sido_name }}
         </option>
       </select>
       구군 :
       <select v-model="selectGugun" @change="getdong">
-        <option
-          v-for="(gugun, index) in gugunlist"
-          :value="gugun.gugun_code"
-          v-bind:key="index"
-        >
+        <option v-for="(gugun, index) in gugunlist" :value="gugun.gugun_code" v-bind:key="index">
           {{ gugun.gugun_name }}
         </option>
       </select>
       읍면동 :
       <select v-model="selectDong" @change="getInfo">
-        <option
-          v-for="(dong, index) in donglist"
-          :value="dong.dong"
-          v-bind:key="index"
-        >
+        <option v-for="(dong, index) in donglist" :value="dong.dong" v-bind:key="index">
           {{ dong.dong }}
         </option>
       </select>
-      <input
-        type="checkbox"
-        id="checkbox"
-        v-model="selected"
-        @click="selectChicken"
-      />치킨
+      <input type="checkbox" id="checkbox" v-model="selected" @click="selectChicken" />치킨
       <br />
     </div>
     <br />
     <div class="row">
       <div class="col">
         <!-- 구글맵 출력 -->
-        <gmap-map
-          :center="center"
-          :zoom="14"
-          style="width:100%;  height: 500px;"
-        >
+        <gmap-map :center="center" :zoom="14" style="width:100%;  height: 500px;">
           <gmap-marker
             :key="index"
             v-for="(m, index) in markers"
@@ -58,7 +37,9 @@
         </gmap-map>
       </div>
       <!-- 아파트 디테일 출력 -->
+
       <div class="col">
+        <h1>실거래가 정보</h1>
         <apt-detail />
       </div>
       <div class="row">
@@ -72,15 +53,15 @@
 </template>
 
 <script>
-import axios from "axios";
-import AptDetail from "./AptDetail.vue";
+import axios from 'axios';
+import AptDetail from './AptDetail.vue';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   components: { AptDetail },
-  name: "GoogleMap",
+  name: 'GoogleMap',
   data() {
     return {
-      selected: "",
+      selected: '',
       // default to montreal to keep it simple
       // change this to whatever makes sense
 
@@ -91,16 +72,16 @@ export default {
       sidolist: [],
       gugunlist: [],
       donglist: [],
-      selecSido: "",
-      selectGugun: "",
-      selectDong: "",
+      selecSido: '',
+      selectGugun: '',
+      selectDong: '',
     };
   },
 
   created: function() {
     //초기화하기
-    this.$store.commit("APTLIST", []);
-    this.$store.commit("APTDETAIL", []);
+    this.$store.commit('APTLIST', []);
+    this.$store.commit('APTDETAIL', []);
     axios
       .get(`${SERVER_URL}/map/sido`)
       .then((response) => {
@@ -108,7 +89,7 @@ export default {
         console.log(this.sidolist);
       })
       .catch(() => {
-        alert("시도코드 에러가 발생했습니다.");
+        alert('시도코드 에러가 발생했습니다.');
       });
   },
 
@@ -148,7 +129,7 @@ export default {
           console.log(this.gugunlist);
         })
         .catch(() => {
-          alert("구군코드 에러가 발생했습니다.");
+          alert('구군코드 에러가 발생했습니다.');
         });
     },
     getdong: function() {
@@ -160,7 +141,7 @@ export default {
           console.log(this.donglist);
         })
         .catch(() => {
-          alert("동코드 에러가 발생했습니다.");
+          alert('동코드 에러가 발생했습니다.');
         });
     },
     // saveDongCode: function() {
@@ -189,7 +170,7 @@ export default {
       axios
         .get(`${SERVER_URL}/map/houseinfo/${this.selectDong}`)
         .then((response) => {
-          this.$store.commit("APTLIST", response.data.houseInfo);
+          this.$store.commit('APTLIST', response.data.houseInfo);
           //경도 위도 받아서 마커 설정
           this.markers.splice(0);
           this.center = {
@@ -202,12 +183,12 @@ export default {
                 lat: parseFloat(response.data.houseInfo[i].lat),
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
-              icon: "house.ico",
+              icon: 'house.ico',
             });
           }
         })
         .catch(() => {
-          alert("아파트 리스트를 받는 중, 에러가 발생했습니다.");
+          alert('아파트 리스트를 받는 중, 에러가 발생했습니다.');
         });
     },
     selectChicken: function() {
@@ -225,12 +206,12 @@ export default {
                   lat: parseFloat(response.data.placeInfo[i].lat),
                   lng: parseFloat(response.data.placeInfo[i].lng),
                 },
-                icon: "chicken.ico",
+                icon: 'chicken.ico',
               });
             }
           })
           .catch(() => {
-            alert("상권정보를 받는 중, 에러가 발생했습니다.");
+            alert('상권정보를 받는 중, 에러가 발생했습니다.');
           });
       } else {
         this.markers.splice(0);
@@ -240,7 +221,7 @@ export default {
               lat: parseFloat(this.$store.state.aptList[i].lat),
               lng: parseFloat(this.$store.state.aptList[i].lng),
             },
-            icon: "house.ico",
+            icon: 'house.ico',
           });
         }
       }

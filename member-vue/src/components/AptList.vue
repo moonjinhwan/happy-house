@@ -1,25 +1,42 @@
 <template>
   <section>
-    <tr>
-      <th>법정동</th>
-      <th>아파트 이름</th>
-      <th>지번</th>
-    </tr>
-    <apt-list-item v-for="(apt, index) in getAptList" :key="index" :aptInfo="apt"> </apt-list-item>
+    <b-table
+      sticky-header
+      :items="getAptList"
+      head-variant="light"
+      @row-clicked="aptDetail"
+    ></b-table>
   </section>
 </template>
 
 <script>
-import AptListItem from '@/components/AptListItem';
-
-import { mapGetters } from 'vuex';
+import axios from 'axios';
+import { mapGetters, mapMutations } from 'vuex';
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
-  components: { AptListItem },
-  comments: {
-    AptListItem,
-  },
   computed: {
     ...mapGetters(['getAptList']),
+  },
+
+  methods: {
+    ...mapMutations({
+      setDetail: 'APTDETAIL',
+    }),
+    aptDetail: function(obj) {
+      console.log(obj);
+      axios
+        .post(`${SERVER_URL}/map/detail`, {
+          dong: obj.dong,
+          aptName: obj.aptName,
+        })
+        .then((response) => {
+          console.log(response);
+          this.setDetail(response.data.detailInfo);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
