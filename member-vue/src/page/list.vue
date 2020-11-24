@@ -1,35 +1,38 @@
 <template>
-  <div id="qna">
-    <div v-if="items.length">
-      <h3>Happy House는 항상 고객님을 우선시 생각합니다.</h3>
-      <hr />
-      <br />
-      <table class="table table-bordered table-condensed">
-        <colgroup>
-          <col :style="{ width: '5%' }" />
-          <col :style="{ width: '50%' }" />
-          <col :style="{ width: '10%' }" />
-          <col :style="{ width: '25%' }" />
-        </colgroup>
-        <tr>
-          <th>번호</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>날짜</th>
-        </tr>
-        <list-row
-          v-for="(item, index) in items"
-          :key="`${index}_items`"
-          :no="item.no"
-          :title="item.title"
-          :writer="item.writer"
-          :regtime="item.regtime"
-        />
-      </table>
-    </div>
-    <div v-else>글이 없습니다.</div>
-    <div class="text-right">
-      <button class="btn btn-outline-primary" @click="movePage">등록</button>
+  <div>
+    <que />
+    <div id="qna">
+      <div v-if="items.length">
+        <h3>Happy House는 항상 고객님을 우선시 생각합니다.</h3>
+        <hr />
+        <br />
+        <table class="table table-bordered table-condensed">
+          <colgroup>
+            <col :style="{ width: '5%' }" />
+            <col :style="{ width: '50%' }" />
+            <col :style="{ width: '10%' }" />
+            <col :style="{ width: '25%' }" />
+          </colgroup>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+          </tr>
+          <list-row
+            v-for="(item, index) in items"
+            :key="`${index}_items`"
+            :no="item.no"
+            :title="item.title"
+            :writer="item.writer"
+            :regtime="item.regtime"
+          />
+        </table>
+      </div>
+      <div v-else>글이 없습니다.</div>
+      <div class="text-right">
+        <button class="btn btn-outline-primary" @click="movePage">등록</button>
+      </div>
     </div>
   </div>
 </template>
@@ -37,10 +40,13 @@
 <script>
 import http from "@/util/http-common";
 import ListRow from "@/components/Row.vue";
+import que from "@/components/qna.vue";
+
 export default {
   name: "list",
   components: {
     ListRow,
+    que,
   },
   data: function() {
     return {
@@ -72,7 +78,7 @@ th {
 #qna {
   margin-left: 20%;
   margin-right: 20%;
-  margin-top: 7%;
+  margin-top: 3%;
   margin-bottom: 7%;
 }
 </style>

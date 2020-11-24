@@ -1,22 +1,28 @@
 <template>
-  <div id="qna">
-    <detail
-      :content="item.content"
-      :title="item.title"
-      :writer="item.writer"
-      :regtime="item.regtime"
-      :no="item.no"
-    />
+  <div>
+    <que />
+    <div id="qna">
+      <detail
+        :content="item.content"
+        :title="item.title"
+        :writer="item.writer"
+        :regtime="item.regtime"
+        :no="item.no"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
 import Detail from "@/components/Detail.vue";
+import que from "@/components/qna.vue";
+
 export default {
   name: "read",
   components: {
     Detail,
+    que,
   },
   data: function() {
     return {

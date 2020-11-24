@@ -1,11 +1,19 @@
 <template>
-  <div id="qna">삭제중...</div>
+  <div>
+    <que />
+    <div id="qna"></div>
+  </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import que from "@/components/qna.vue";
+
 export default {
   name: "delete",
+  components: {
+    que,
+  },
   created() {
     http
       .delete(`/board/${this.$route.query.no}`)
