@@ -12,6 +12,7 @@ import Create from "@/page/create.vue";
 import Read from "@/page/read.vue";
 import Modify  from "@/page/modify.vue";
 import Delete from "@/page/delete.vue";
+import MyPage from "@/views/MyPage.vue"
 // import { join } from "core-js/fn/array";
 
 Vue.use(VueRouter);
@@ -87,6 +88,11 @@ const routes = [
     name: "delete",
     component: Delete,
   },
+  {
+    path: "/myPage",
+    name: "myPage",
+    component: MyPage,
+  }
 ];
 
 const router = new VueRouter({
