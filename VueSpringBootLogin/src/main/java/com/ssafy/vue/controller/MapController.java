@@ -122,9 +122,6 @@ public class MapController {
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {
 			List<PlaceDto> list = service.getPlace(info);
-			for(PlaceDto dto : list) {
-				System.out.println(dto.toString());
-			}
 			resultMap.put("placeInfo", list);
 			status = HttpStatus.ACCEPTED;
 		} catch (RuntimeException e) {

@@ -1,20 +1,12 @@
 package com.ssafy.vue.model;
 
 public class MyPageDto {
-	private String no;
 	private String userId;
 	private String aptName;
 	private String dealAmount;
 	private String dealYear;
 	private String dong;
-	private String buildYear;
 	
-	public String getNo() {
-		return no;
-	}
-	public void setNo(String no) {
-		this.no = no;
-	}
 	public String getUserId() {
 		return userId;
 	}
@@ -45,16 +37,10 @@ public class MyPageDto {
 	public void setDong(String dong) {
 		this.dong = dong;
 	}
-	public String getBuildYear() {
-		return buildYear;
-	}
-	public void setBuildYear(String buildYear) {
-		this.buildYear = buildYear;
-	}
 	@Override
 	public String toString() {
-		return "MyPageDto [no=" + no + ", userId=" + userId + ", aptName=" + aptName + ", dealAmount=" + dealAmount
-				+ ", dealYear=" + dealYear + ", dong=" + dong + ", buildYear=" + buildYear + "]";
+		return "MyPageDto ["+"userId=" + userId + ", aptName=" + aptName + ", dealAmount=" + dealAmount
+				+ ", dealYear=" + dealYear + ", dong=" + dong + ", buildYear="+ "]";
 	}
 	
 	

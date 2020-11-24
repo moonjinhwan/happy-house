@@ -35,7 +35,7 @@
 	</select>
 	
 	<insert id="insertMyPage" parameterType="MyPageDto">
-		insert into mypage(userId, aptName, dealAmount, dealYear, dong, buildYear)
-		values(#{userId}, #{aptName}, #{dealAmount}, #{dealYear}, #{dong}, #{buildYear})
+		insert into mypage(userId, aptName, dealAmount, dealYear, dong)
+		values(#{userId}, #{aptName}, #{dealAmount}, #{dealYear}, #{dong})
 	</insert>
 </mapper>
