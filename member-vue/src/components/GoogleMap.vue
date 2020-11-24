@@ -20,14 +20,6 @@
         </option>
       </select>
       <input type="checkbox" id="checkbox" v-model="selected" @click="selectChicken" />치킨
-      <!-- <b-form-checkbox-group id="checkbox-group-2" v-model="selected" name="flavour-2">
-        <b-form-checkbox value="chicken">치킨</b-form-checkbox>
-        <b-form-checkbox value="caffe">카페</b-form-checkbox>
-      </b-form-checkbox-group> -->
-      <!-- <label>
-        <gmap-autocomplete @place_changed="setPlace"> </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label> -->
       <br />
     </div>
     <br />
@@ -171,7 +163,7 @@ export default {
         .then((response) => {
           this.$store.commit('APTLIST', response.data.houseInfo);
           //경도 위도 받아서 마커 설정
-          this.markers = [];
+          this.markers.splice(0);
           this.center = {
             lat: parseFloat(response.data.houseInfo[0].lat),
             lng: parseFloat(response.data.houseInfo[0].lng),
@@ -191,27 +183,39 @@ export default {
         });
     },
     selectChicken: function() {
-      axios
-        .post(`${SERVER_URL}/map/place`, {
-          dongname: this.selectDong,
-          type: 2,
-        })
-        .then((response) => {
-          console.log(response.data.placeInfo);
-          for (var i = 0; i < response.data.placeInfo.length; i++) {
-            console.log('반복문 돌리고있어요');
-            this.markers.push({
-              position: {
-                lat: parseFloat(response.data.placeInfo[i].lat),
-                lng: parseFloat(response.data.placeInfo[i].lng),
-              },
-              icon: 'chicken.ico',
-            });
-          }
-        })
-        .catch(() => {
-          alert('상권정보를 받는 중, 에러가 발생했습니다.');
-        });
+      if (this.selected == false) {
+        axios
+          .post(`${SERVER_URL}/map/place`, {
+            dongname: this.selectDong,
+            type: 2,
+          })
+          .then((response) => {
+            console.log(response.data.placeInfo);
+            for (var i = 0; i < response.data.placeInfo.length; i++) {
+              console.log('반복문 돌리고있어요');
+              this.markers.push({
+                position: {
+                  lat: parseFloat(response.data.placeInfo[i].lat),
+                  lng: parseFloat(response.data.placeInfo[i].lng),
+                },
+                icon: 'chicken.ico',
+              });
+            }
+          })
+          .catch(() => {
+            alert('상권정보를 받는 중, 에러가 발생했습니다.');
+          });
+      } else {
+        this.markers.splice(0);
+        for (var i = 0; i < this.$store.aptList.aptList.length; i++) {
+          this.markers.push({
+            position: {
+              lat: parseFloat(this.$store.aptList.aptList[i].lat),
+              lng: parseFloat(this.$store.aptList.aptList[i].lng),
+            },
+          });
+        }
+      }
     },
   },
 };
