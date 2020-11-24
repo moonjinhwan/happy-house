@@ -38,7 +38,6 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          // this.setDetail(response.data.response.body.items.item);
           this.setDetail(response.data.detailInfo);
         })
         .catch((error) => {

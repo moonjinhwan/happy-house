@@ -1,7 +1,12 @@
 <template>
-  <tr>
+  <section>
+    <tr>
+      <th>법정동</th>
+      <th>아파트 이름</th>
+      <th>지번</th>
+    </tr>
     <apt-list-item v-for="(apt, index) in getAptList" :key="index" :aptInfo="apt"> </apt-list-item>
-  </tr>
+  </section>
 </template>
 
 <script>
