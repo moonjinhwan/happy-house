@@ -5,6 +5,7 @@
       :items="getAptList"
       head-variant="light"
       @row-clicked="aptDetail"
+      hover
     ></b-table>
   </section>
 </template>
@@ -23,7 +24,6 @@ export default {
       setDetail: 'APTDETAIL',
     }),
     aptDetail: function(obj) {
-      console.log(obj);
       axios
         .post(`${SERVER_URL}/map/detail`, {
           dong: obj.dong,

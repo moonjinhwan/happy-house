@@ -7,7 +7,11 @@ import Me from "../views/Me.vue";
 import store from "../store";
 import Join from "../views/Join.vue";
 import SearchApt from "../views/SearchApt.vue";
-import qna from "../views/qna.vue";
+import List from "@/page/list.vue";
+import Create from "@/page/create.vue";
+import Read from "@/page/read.vue";
+import Modify  from "@/page/modify.vue";
+import Delete from "@/page/delete.vue";
 // import { join } from "core-js/fn/array";
 
 Vue.use(VueRouter);
@@ -40,7 +44,7 @@ const routes = [
   {
     path: "/update",
     name: "update",
-    component: Update,
+    component: Update
   },
   {
     path: "/me",
@@ -51,18 +55,38 @@ const routes = [
   {
     path: "/join",
     name: "Join",
-    component: Join,
+    component: Join
   },
   {
     path: "/searchApt",
-    name: 'searchApt',
-    component: SearchApt,
+    name: "searchApt",
+    component: SearchApt
   },
   {
-    path: "/qna",
-    name: 'qna',
-    component: qna,
-  }
+    path: "/list",
+    name: "list",
+    component: List,
+  },
+  {
+    path: "/create",
+    name: "create",
+    component: Create,
+  },
+  {
+    path: "/read",
+    name: "read",
+    component: Read,
+  },
+  {
+    path: "/modify",
+    name: "modify",
+    component: Modify,
+  },
+  {
+    path: "/delete",
+    name: "delete",
+    component: Delete,
+  },
 ];
 
 const router = new VueRouter({

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.vue.model.MemberDto;
+import com.ssafy.vue.model.MyPageDto;
 import com.ssafy.vue.model.service.JwtService;
 import com.ssafy.vue.model.service.MemberService;
 
@@ -63,28 +64,6 @@ public class MemberController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
-//	@PostMapping("/info")
-//	public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest req, HttpSession session) {
-//		Map<String, Object> resultMap = new HashMap<>();
-//		HttpStatus status = null;
-//		try {
-//			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//			if(memberDto != null) {
-//				// 보너스로 토큰에 담긴 정보도 전달해보자. 서버에서 토큰을 사용하는 방법임을 알 수 있다.
-//				resultMap.putAll(jwtService.get(req.getHeader("auth-token")));
-//	
-//				resultMap.put("status", true);
-//				resultMap.put("info", info);
-//				resultMap.put("request_body", memberDto);
-//				status = HttpStatus.ACCEPTED;
-//			}
-//		} catch (RuntimeException e) {
-//			logger.error("정보조회 실패 : {}", e);
-//			resultMap.put("message", e.getMessage());
-//			status = HttpStatus.INTERNAL_SERVER_ERROR;
-//		}
-//		return new ResponseEntity<Map<String, Object>>(resultMap, status);
-//	}
 
 	@GetMapping("/info")
 	public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest req) throws Exception {
@@ -163,4 +142,19 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	@PostMapping("/mypage")
+	public ResponseEntity<Map<String, Object>> insertMyPage(@RequestBody MyPageDto myPageDto){
+		System.out.println(myPageDto.toString());
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		try {		
+			memberService.insertMyPage(myPageDto);
+		}catch (Exception e) {
+			System.out.println("내 페이지 저장 실패");
+			resultMap.put("message", "내 페이지 저장 실패");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
 }

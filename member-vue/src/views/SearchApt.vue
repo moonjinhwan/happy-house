@@ -27,13 +27,13 @@
 
 <script>
 import GoogleMap from '../components/GoogleMap';
-// import AptList from '../components/AptList';
 import AptList from '../components/AptList';
+
 export default {
   name: 'App',
   components: {
     GoogleMap,
-    // AptList,/////
+    // AptList,
     AptList,
   },
 };
