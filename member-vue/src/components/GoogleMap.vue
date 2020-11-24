@@ -54,7 +54,7 @@ export default {
   name: 'GoogleMap',
   data() {
     return {
-      selected: [],
+      selected: '',
       // default to montreal to keep it simple
       // change this to whatever makes sense
 
@@ -174,8 +174,7 @@ export default {
                 lat: parseFloat(response.data.houseInfo[i].lat),
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
-              icon: 'house.ico'
-              // icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
+              icon: 'house.ico',
             });
           }
         })
@@ -193,7 +192,6 @@ export default {
           .then((response) => {
             console.log(response.data.placeInfo);
             for (var i = 0; i < response.data.placeInfo.length; i++) {
-              console.log('반복문 돌리고있어요');
               this.markers.push({
                 position: {
                   lat: parseFloat(response.data.placeInfo[i].lat),
@@ -208,12 +206,13 @@ export default {
           });
       } else {
         this.markers.splice(0);
-        for (var i = 0; i < this.$store.aptList.aptList.length; i++) {
+        for (var i = 0; i < this.$store.state.aptList.length; i++) {
           this.markers.push({
             position: {
-              lat: parseFloat(this.$store.aptList.aptList[i].lat),
-              lng: parseFloat(this.$store.aptList.aptList[i].lng),
+              lat: parseFloat(this.$store.state.aptList[i].lat),
+              lng: parseFloat(this.$store.state.aptList[i].lng),
             },
+            icon: 'house.ico',
           });
         }
       }
