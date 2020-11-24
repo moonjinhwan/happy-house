@@ -100,7 +100,6 @@ public class MemberController {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {
-			System.out.println(">>>>업데이트 " + memberDto.toString());
 			memberService.update(memberDto);
 		} catch (Exception e) {
 			resultMap.put("message", "로그인 실패");

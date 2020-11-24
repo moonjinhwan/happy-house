@@ -19,16 +19,21 @@ export default {
     ...mapGetters(['getAptDetail']),
   },
   methods: {
-    mypage(object) {
+    mypage(obj) {
+      console.log(obj);
       if (this.$store.state.userId == '') {
         alert('로그인을 해주세요');
       } else {
         axios
           .post(`${SERVER_URL}/user/mypage`, {
-            object,
+            userId: this.$store.state.userId,
+            aptName: obj.AptName,
+            dealAmount: obj.dealAmount,
+            dealYear: obj.dealYear,
+            dong: obj.dong,
           })
-          .then((response) => {
-            console.log(response.data);
+          .then(() => {
+            alert('내 페이지에 저장 되었어요');
           })
           .catch((error) => {
             console.log(error);
