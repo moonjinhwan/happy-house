@@ -5,6 +5,7 @@
       :items="getAptDetail"
       head-variant="light"
       @row-clicked="handler"
+      hover
     ></b-table>
   </div>
 </template>
