@@ -3,7 +3,12 @@
     <b-row>
       <b-col></b-col>
       <b-col cols="8">
-        <b-card class="mt-3" header="로그인" style="max-width: 40rem;" align="left">
+        <b-card
+          class="mt-3"
+          header="Login"
+          style="max-width: 40rem;"
+          align="left"
+        >
           <b-form>
             <b-form-group label="아이디:" label-for="userid">
               <b-form-input
@@ -23,8 +28,22 @@
                 @keypress.enter="login"
               ></b-form-input>
             </b-form-group>
-            <b-button type="button" variant="primary" class="m-1" @click="login">로그인</b-button>
-            <b-button type="button" variant="success" class="m-1" @click="join">회원가입</b-button>
+            <div style="text-align:center">
+              <b-button
+                type="button"
+                variant="primary"
+                class="m-1"
+                @click="login"
+                >로그인</b-button
+              >
+              <b-button
+                type="button"
+                variant="success"
+                class="m-1"
+                @click="join"
+                >회원가입</b-button
+              >
+            </div>
           </b-form>
         </b-card>
       </b-col>
@@ -34,25 +53,25 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
 export default {
-  name: 'Login',
+  name: "Login",
   data: function() {
     return {
       user: {
-        userid: '',
-        userpwd: '',
+        userid: "",
+        userpwd: "",
       },
-      message: '',
+      message: "",
     };
   },
   computed: {
     nextRoute() {
-      return this.$route.params.nextRoute ? this.$route.params.nextRoute : '';
+      return this.$route.params.nextRoute ? this.$route.params.nextRoute : "";
     },
   },
   methods: {
@@ -60,12 +79,12 @@ export default {
       // LOGIN 액션 실행
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
-        .dispatch('LOGIN', this.user)
+        .dispatch("LOGIN", this.user)
         .then(() => this.$router.replace(`/${this.nextRoute}`)) //주소를 변경
         .catch(({ message }) => (this.msg = message));
     },
     join: function() {
-      this.$router.replace('join');
+      this.$router.replace("join");
     },
   },
 };
@@ -74,5 +93,9 @@ export default {
 <style scope>
 #login-div {
   text-align: center;
+}
+.bv-example-row {
+  padding-top: 125px;
+  padding-bottom: 125px;
 }
 </style>

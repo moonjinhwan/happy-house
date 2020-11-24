@@ -4,11 +4,9 @@
       <b-col></b-col>
       <b-col cols="8">
         <b-jumbotron>
-          <template #header>Join Page</template>
-
-          <template #lead>
-            회원가입 페이지 입니다
-          </template>
+          <h1>Join Page</h1>
+          <br />
+          <h4>회원가입 페이지입니다</h4>
 
           <hr class="my-4" />
 
@@ -55,7 +53,9 @@
             </b-row>
           </b-container>
           <hr class="my-4" />
-          <b-button variant="primary" href="#" class="mr-1" @click="join">회원가입</b-button>
+          <b-button variant="primary" href="#" class="mr-1" @click="join"
+            >회원가입</b-button
+          >
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -72,11 +72,11 @@ export default {
   data() {
     return {
       user: null,
-      userid: '',
-      userpwd: '',
-      username: '',
-      email: '',
-      address: '',
+      userid: "",
+      userpwd: "",
+      username: "",
+      email: "",
+      address: "",
     };
   },
   methods: {
@@ -90,16 +90,16 @@ export default {
           address: this.address,
         })
         .then(() => {
-          alert('회원가입 완료');
+          alert("회원가입 완료");
           //정보변환
           this.moveMain();
         })
         .catch(() => {
-          alert('회원가입 처리시 에러가 발생했습니다.');
+          alert("회원가입 처리시 에러가 발생했습니다.");
         });
     },
     moveMain() {
-      this.$router.replace('/');
+      this.$router.replace("/");
     },
   },
 };

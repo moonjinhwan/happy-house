@@ -4,11 +4,9 @@
       <b-col></b-col>
       <b-col cols="8">
         <b-jumbotron>
-          <template #header>Update Page</template>
-
-          <template #lead>
-            수정 페이지 입니다
-          </template>
+          <h1>Update Page</h1>
+          <br />
+          <h4>정보수정 페이지입니다</h4>
 
           <hr class="my-4" />
 
@@ -56,7 +54,9 @@
           </b-container>
           <hr class="my-4" />
 
-          <b-button variant="primary" href="#" class="mr-1" @click="update">정보수정</b-button>
+          <b-button variant="primary" href="#" class="mr-1" @click="update"
+            >정보수정</b-button
+          >
           <b-button variant="danger" href="#" @click="del">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -83,7 +83,7 @@ export default {
         this.user = response.data.info;
       })
       .catch(() => {
-        this.$store.dispatch('LOGOUT').then(() => this.moveMain());
+        this.$store.dispatch("LOGOUT").then(() => this.moveMain());
       });
   },
   methods: {
@@ -97,27 +97,27 @@ export default {
           joindate: this.user.joindate,
         })
         .then(() => {
-          alert('수정 완료');
+          alert("수정 완료");
           //정보변환
           this.moveMain();
         })
         .catch(() => {
-          alert('수정 처리시 에러가 발생했습니다.');
+          alert("수정 처리시 에러가 발생했습니다.");
         });
     },
     del: function() {
       axios
         .delete(`${SERVER_URL}/user/${this.user.userid}`)
         .then(() => {
-          alert('삭제 완료');
+          alert("삭제 완료");
           this.moveMain();
         })
         .catch(() => {
-          alert('삭제 시 에러가 발생했습니다.');
+          alert("삭제 시 에러가 발생했습니다.");
         });
     },
     moveMain() {
-      this.$router.replace('/');
+      this.$router.replace("/");
     },
   },
 };

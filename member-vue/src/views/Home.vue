@@ -14,14 +14,14 @@
         <br />
         <br />
         <br />
-        <b-button pill variant="success btn-lg" 
+        <b-button pill variant="info btn-lg"
           ><router-link to="/searchApt" id="mainbutton">
-             지금 검색할래요
+            지금 검색할래요
           </router-link></b-button
         >
       </b-jumbotron>
     </div>
-    <Main msg="Welcome to SSAFY App" />
+    <Main msg="" />
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
 h1 {
   font-weight: bold;
 }
-#mainbutton{
+#mainbutton {
   color: white;
 }
 </style>
