@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.vue.model.MemberDto;
+import com.ssafy.vue.model.MyPageDto;
 import com.ssafy.vue.model.mapper.MemberMapper;
 
 @Service
@@ -45,5 +46,11 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public boolean join(MemberDto memberDto) throws Exception {
 		return sqlSession.getMapper(MemberMapper.class).join(memberDto)==1;
+	}
+	
+	@Override
+	@Transactional
+	public boolean insertMyPage(MyPageDto myPageDto) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).insertMyPage(myPageDto)==1;
 	}
 }
