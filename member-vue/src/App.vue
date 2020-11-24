@@ -3,18 +3,32 @@
     <div id="navbar">
       <b-navbar toggleable="lg" variant="faded" type="light">
         <b-navbar-brand tag="h1" class="mb-0"
-          ><router-link to="/"
+          ><router-link to="/" style="padding-left: 30px"
             ><img
               src="@/assets/nav_logo.png"
               class="d-inline-block align-middle"
               width="200px"
-            /> </router-link
-        ></b-navbar-brand>
+            />
+          </router-link>
+        </b-navbar-brand>
         <!-- <b-navbar-brand href="/">SSAFY</b-navbar-brand> -->
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
+          <router-link
+            to="/searchApt"
+            class="loginout"
+            style="padding-right: 30px"
+            >아파트 검색</router-link
+          >
+          <router-link
+            to="/qna"
+            class="loginout"
+            style="padding-right: 30px"
+            >QnA 게시판</router-link
+          >
+
           <b-navbar-nav class="ml-auto" v-if="getAccessToken">
             <b-nav-item
               ><b-avatar
@@ -157,6 +171,7 @@ export default {
 
 .loginout {
   color: black;
+  font-size: 17px;
 }
 
 a:hover {
