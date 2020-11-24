@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div id="qna">
     <div v-if="items.length">
-      <h5>무엇이든 물어보세요</h5>
+      <h3>Happy House는 항상 고객님을 우선시 생각합니다.</h3>
+      <hr />
+      <br />
       <table class="table table-bordered table-condensed">
         <colgroup>
           <col :style="{ width: '5%' }" />
@@ -27,7 +29,7 @@
     </div>
     <div v-else>글이 없습니다.</div>
     <div class="text-right">
-      <button class="btn btn-primary" @click="movePage">등록</button>
+      <button class="btn btn-outline-primary" @click="movePage">등록</button>
     </div>
   </div>
 </template>
@@ -65,6 +67,12 @@ export default {
 
 <style>
 th {
-  background-color: pink;
+  background-color: mintcream;
+}
+#qna {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 7%;
+  margin-bottom: 7%;
 }
 </style>

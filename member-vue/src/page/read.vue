@@ -1,6 +1,5 @@
 <template>
-  <div>
-    
+  <div id="qna">
     <detail
       :content="item.content"
       :title="item.title"
@@ -12,10 +11,10 @@
 </template>
 
 <script>
-import http from '@/util/http-common';
-import Detail from '@/components/Detail.vue';
+import http from "@/util/http-common";
+import Detail from "@/components/Detail.vue";
 export default {
-  name: 'read',
+  name: "read",
   components: {
     Detail,
   },

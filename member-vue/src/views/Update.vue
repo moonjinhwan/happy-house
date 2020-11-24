@@ -54,10 +54,10 @@
           </b-container>
           <hr class="my-4" />
 
-          <b-button variant="primary" href="#" class="mr-1" @click="update"
+          <b-button variant="btn btn-outline-primary" href="#" class="mr-1" @click="update"
             >정보수정</b-button
           >
-          <b-button variant="danger" href="#" @click="del">회원탈퇴</b-button>
+          <b-button variant="btn btn-outline-danger" href="#" @click="del">회원탈퇴</b-button>
         </b-jumbotron>
       </b-col>
       <b-col></b-col>
