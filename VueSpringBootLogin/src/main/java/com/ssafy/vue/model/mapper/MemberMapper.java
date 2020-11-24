@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.vue.model.MemberDto;
+import com.ssafy.vue.model.MyPageDto;
 
 @Mapper
 public interface MemberMapper {
@@ -15,5 +16,5 @@ public interface MemberMapper {
 	public int delete(String userid) throws SQLException;
 	public MemberDto selectOne(String userid) throws SQLException;
 	public int join(MemberDto memberDto) throws SQLException;
-
+	public int insertMyPage(MyPageDto myPageDto) throws SQLException;
 }
