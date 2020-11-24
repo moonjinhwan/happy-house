@@ -13,7 +13,7 @@ export default new Vuex.Store({
     userName: "",
     aptList: [],
     dongCode: "",
-    aptDetail: [],
+    aptDetail: "",
   },
   getters: {
     getAccessToken(state) {

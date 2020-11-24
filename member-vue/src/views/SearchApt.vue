@@ -2,11 +2,8 @@
   <div>
     <b-jumbotron header="Search House"> </b-jumbotron>
     <div class="container">
-      <table class="table d-flex justify-content-center">
-        <tbody>
-          <apt-list />
-        </tbody>
-      </table>
+      <h1>아파트 정보</h1>
+      <apt-list />
     </div>
     <!-- google map 부분  -->
     <div id="app">
@@ -17,12 +14,13 @@
 
 <script>
 import GoogleMap from '../components/GoogleMap';
+// import AptList from '../components/AptList';
 import AptList from '../components/AptList';
-
 export default {
   name: 'App',
   components: {
     GoogleMap,
+    // AptList,
     AptList,
   },
 };
