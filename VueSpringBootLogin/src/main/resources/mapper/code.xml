@@ -22,7 +22,8 @@
 	</select>
 	
 	<select id="getHouseInfo" resultType="HouseInfoDto" parameterType="String">
-		SELECT no, dong, AptName, code, jibun, lat, lng FROM houseinfo WHERE dong = #{dongName}
+		SELECT no, dong, AptName, code, jibun, lat, lng 
+		FROM houseinfo WHERE dong = #{dongName}
 		ORDER BY AptName
 	</select>
 	
@@ -30,5 +31,11 @@
 		SELECT dong, AptName, dealAmount, area, dealYear
 		FROM housedeal
 		WHERE dong = #{dong} and AptName like concat('%',#{aptName},'%');
+	</select>
+	
+	<select id="getPlace" resultType="PlaceDto" parameterType="map">
+		select *
+		from places
+		where dongname = #{dongname} and type=#{type}
 	</select>
 </mapper>

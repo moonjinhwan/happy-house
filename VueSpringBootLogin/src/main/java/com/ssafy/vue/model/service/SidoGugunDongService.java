@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.vue.model.HouseInfoDto;
+import com.ssafy.vue.model.PlaceDto;
 import com.ssafy.vue.model.SidoGugunCodeDto;
 import com.ssafy.vue.model.mapper.SidoGugunDongMapper;
 
@@ -32,7 +33,12 @@ public class SidoGugunDongService {
 		return sqlSession.getMapper(SidoGugunDongMapper.class).getHouseInfo(dongName);
 	}
 	
-	public List<Map<String, Object>> getDetail( Map<String ,Object> info) throws Exception{
+	public List<Map<String, Object>> getDetail(Map<String ,Object> info) throws Exception{
 		return sqlSession.getMapper(SidoGugunDongMapper.class).getDetail(info);
+	}
+	
+	public List<PlaceDto> getPlace(Map<String ,Object> info) throws Exception{
+		System.out.println("서비스 들어옴");
+		return sqlSession.getMapper(SidoGugunDongMapper.class).getPlace(info);
 	}
 }

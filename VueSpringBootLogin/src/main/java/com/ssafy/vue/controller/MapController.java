@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.vue.model.HouseInfoDto;
+import com.ssafy.vue.model.PlaceDto;
 import com.ssafy.vue.model.SidoGugunCodeDto;
 import com.ssafy.vue.model.service.SidoGugunDongService;
 
@@ -101,14 +102,30 @@ public class MapController {
 	@PostMapping("/detail")
 	public ResponseEntity<Map<String, Object>> getDetail(@RequestBody Map<String, Object> info, HttpServletRequest req) throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();
-		System.out.println(">>>>>>>>>>>>>>>>"+info.get("dong"));
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {
 			List<Map<String, Object>> list = service.getDetail(info);
-			for(Map<String, Object> k : list) {
-				System.out.println(k.get("dong"));
-			}
 			resultMap.put("detailInfo", list);
+			status = HttpStatus.ACCEPTED;
+		} catch (RuntimeException e) {
+			
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@PostMapping("/place")
+	public ResponseEntity<Map<String, Object>> getPlace(@RequestBody Map<String, Object> info, HttpServletRequest req) throws Exception{
+		System.out.println(info.get("dongname")+" "+ info.get("type"));
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		try {
+			List<PlaceDto> list = service.getPlace(info);
+			for(PlaceDto dto : list) {
+				System.out.println(dto.toString());
+			}
+			resultMap.put("placeInfo", list);
 			status = HttpStatus.ACCEPTED;
 		} catch (RuntimeException e) {
 			
