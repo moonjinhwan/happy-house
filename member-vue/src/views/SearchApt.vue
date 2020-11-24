@@ -20,7 +20,7 @@ export default {
   name: 'App',
   components: {
     GoogleMap,
-    // AptList,
+    // AptList,/////
     AptList,
   },
 };
