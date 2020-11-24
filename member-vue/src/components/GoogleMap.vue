@@ -19,6 +19,11 @@
           {{ dong.dong }}
         </option>
       </select>
+      <input type="checkbox" id="checkbox" v-model="selected" @click="selectChicken" />치킨
+      <!-- <b-form-checkbox-group id="checkbox-group-2" v-model="selected" name="flavour-2">
+        <b-form-checkbox value="chicken">치킨</b-form-checkbox>
+        <b-form-checkbox value="caffe">카페</b-form-checkbox>
+      </b-form-checkbox-group> -->
       <!-- <label>
         <gmap-autocomplete @place_changed="setPlace"> </gmap-autocomplete>
         <button @click="addMarker">Add</button>
@@ -57,18 +62,12 @@ export default {
   name: 'GoogleMap',
   data() {
     return {
+      selected: [],
       // default to montreal to keep it simple
       // change this to whatever makes sense
+
       center: { lat: 37.5567056, lng: 127.0196111 },
-      markers: [
-        {
-          position: {
-            lat: 37.5567056,
-            lng: 127.0196111,
-          },
-          icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
-        },
-      ],
+      markers: [],
       places: [],
       currentPlace: null,
       sidolist: [],
@@ -183,11 +182,35 @@ export default {
                 lat: parseFloat(response.data.houseInfo[i].lat),
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
+              // icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
             });
           }
         })
         .catch(() => {
           alert('아파트 리스트를 받는 중, 에러가 발생했습니다.');
+        });
+    },
+    selectChicken: function() {
+      axios
+        .post(`${SERVER_URL}/map/place`, {
+          dongname: this.selectDong,
+          type: 2,
+        })
+        .then((response) => {
+          console.log(response.data.placeInfo);
+          for (var i = 0; i < response.data.placeInfo.length; i++) {
+            console.log('반복문 돌리고있어요');
+            this.markers.push({
+              position: {
+                lat: parseFloat(response.data.placeInfo[i].lat),
+                lng: parseFloat(response.data.placeInfo[i].lng),
+              },
+              icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
+            });
+          }
+        })
+        .catch(() => {
+          alert('상권정보를 받는 중, 에러가 발생했습니다.');
         });
     },
   },
