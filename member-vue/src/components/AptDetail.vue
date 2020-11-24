@@ -22,7 +22,12 @@
         </tr>
       </tbody>
     </table> -->
-    <b-table sticky-header :items="getAptDetail" head-variant="light"></b-table>
+    <b-table
+      sticky-header
+      :items="getAptDetail"
+      head-variant="light"
+      @row-clicked="handler"
+    ></b-table>
   </div>
 </template>
 
@@ -32,6 +37,12 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapGetters(['getAptDetail']),
+  },
+  methods: {
+    handler(a, b) {
+      alert(a);
+      alert(b);
+    },
   },
 };
 </script>

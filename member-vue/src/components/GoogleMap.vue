@@ -36,10 +36,15 @@
           ></gmap-marker>
         </gmap-map>
       </div>
-
       <!-- 아파트 디테일 출력 -->
       <div class="col">
         <apt-detail />
+      </div>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <place-detail />
+        </div>
       </div>
     </div>
   </div>
