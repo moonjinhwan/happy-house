@@ -1,12 +1,82 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p style="padding: 50px;">
-      <marquee scrolldelay="20" scrollamount="20"
-        >한학기 동안 너무 고생 많았어요. 2학기 가서도 열심히 공부하는 4기 되고
-        좋은 결과있기를 바랄께요!!! 싸피 4 氣 충 전~~~~</marquee
-      >
-    </p>
+  <div class="bottom-main">
+    <h2>Happy House에서 알려주는 부동산 가이드</h2>
+    <b-container class="bv-example-row" style="padding:30px">
+      <b-row>
+        <b-col
+          ><div>
+            <b-card
+              title="부동산 상식"
+              img-src="dd.jpg"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem;"
+              class="mb-2"
+            >
+              <b-card-text>
+                임대차 계약서 작성시 이것만 알아두면 당신은 부동산의 왕!
+              </b-card-text>
+
+              <b-button
+                href="https://post.naver.com/viewer/postView.nhn?volumeNo=26596142&memberNo=2120568"
+                target="_blank"
+                variant="outline-info"
+                >바로 가기</b-button
+              >
+            </b-card>
+          </div></b-col
+        >
+        <b-col
+          ><div>
+            <b-card
+              title="생활 꿀팁"
+              img-src="bb.jpg"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem;"
+              class="mb-2"
+            >
+              <b-card-text>
+                이사를 준비한다면 필독!!! 이사 체크 리스트
+              </b-card-text>
+
+              <b-button
+                href="https://post.naver.com/viewer/postView.nhn?volumeNo=25389507&memberNo=2120568"
+                target="_blank"
+                variant="outline-info"
+                >바로 가기</b-button
+              >
+            </b-card>
+          </div></b-col
+        >
+        <b-col
+          ><div>
+            <b-card
+              title="Happy House이야기"
+              img-src="cc.jpg"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem;"
+              class="mb-2"
+            >
+              <b-card-text>
+                Happy house 와 함꼐 나에게 꼭 맞는 방을 찾는 방법!
+              </b-card-text>
+
+              <b-button
+                href="https://post.naver.com/viewer/postView.nhn?volumeNo=26311435&memberNo=2120568"
+                target="_blank"
+                variant="outline-info"
+                >바로 가기</b-button
+              >
+            </b-card>
+          </div></b-col
+        >
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -14,14 +84,16 @@
 export default {
   name: "Main",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 
 <style scoped>
-p {
-  font-size: 30pt;
-  color: aquamarine;
+.bottom-main {
+  padding: 100px;
+}
+.box {
+  outline: 5px black;
 }
 </style>
