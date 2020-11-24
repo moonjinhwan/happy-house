@@ -22,10 +22,7 @@
             style="padding-right: 30px"
             >아파트 검색</router-link
           >
-          <router-link
-            to="/qna"
-            class="loginout"
-            style="padding-right: 30px"
+          <router-link to="/list" class="loginout" style="padding-right: 30px"
             >QnA 게시판</router-link
           >
 
