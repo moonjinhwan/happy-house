@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <table class="table table-bordered w-50">
+  <div id="qna">
+    <h3>
+      <strong>{{ writer }}</strong> 님의 "{{ title }}"
+    </h3>
+    <hr />
+    <br />
+    <table class="table table-bordered">
       <tr>
         <th>번호</th>
         <td>{{ no }}</td>
@@ -27,22 +32,28 @@
     <br />
     <div class="text-center">
       <router-link to="/list"
-        ><button class="btn btn-primary"  style="margin-right: 30px">목록</button></router-link
+        ><button class="btn btn-outline-info" style="margin-left: 15px">
+          목록
+        </button></router-link
       >
       <router-link :to="'/modify?no=' + no"
-        ><button class="btn btn-primary "  style="margin-right: 30px">수정</button></router-link
+        ><button class="btn btn-outline-primary " style="margin-left: 15px">
+          수정
+        </button></router-link
       >
       <router-link :to="'/delete?no=' + no"
-        ><button class="btn btn-primary" style="margin-right: 30px">삭제</button></router-link
+        ><button class="btn btn-outline-danger" style="margin-left: 15px">
+          삭제
+        </button></router-link
       >
     </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 export default {
-  name: 'detail',
+  name: "detail",
   props: {
     no: { type: Number },
     writer: { type: String },
@@ -52,7 +63,7 @@ export default {
   },
   methods: {
     getFormatDate(regtime) {
-      return moment(new Date(regtime)).format('YYYY.MM.DD HH:mm:ss');
+      return moment(new Date(regtime)).format("YYYY.MM.DD HH:mm:ss");
     },
   },
 };

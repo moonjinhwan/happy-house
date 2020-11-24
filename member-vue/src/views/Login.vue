@@ -6,7 +6,7 @@
         <b-card
           class="mt-3"
           header="Login"
-          style="max-width: 40rem;"
+          style="max-width: 40rem"
           align="left"
         >
           <b-form>
@@ -31,14 +31,14 @@
             <div style="text-align:center">
               <b-button
                 type="button"
-                variant="primary"
+                variant="btn btn-outline-primary"
                 class="m-1"
                 @click="login"
                 >로그인</b-button
               >
               <b-button
                 type="button"
-                variant="success"
+                variant="btn btn-outline-success"
                 class="m-1"
                 @click="join"
                 >회원가입</b-button

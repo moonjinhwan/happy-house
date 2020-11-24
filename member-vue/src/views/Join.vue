@@ -53,7 +53,7 @@
             </b-row>
           </b-container>
           <hr class="my-4" />
-          <b-button variant="primary" href="#" class="mr-1" @click="join"
+          <b-button variant="btn btn-outline-info" href="#" class="mr-1" @click="join"
             >회원가입</b-button
           >
         </b-jumbotron>

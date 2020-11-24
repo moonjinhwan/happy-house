@@ -199,7 +199,7 @@ i {
   box-shadow: none;
 }
 .jumbotron {
-  background-color: rgb(255, 245, 245);
+  background-color: rgb(232, 255, 251);
 }
 .row {
   padding-top: 5px;
