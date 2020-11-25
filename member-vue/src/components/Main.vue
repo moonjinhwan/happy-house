@@ -13,7 +13,8 @@
                 img-top
                 tag="article"
                 style="max-width: 20rem;"
-                class="mb-2"
+                class="mb-2 shadow-sm p-3 mb-5 bg-white rounded"
+                
               >
                 <b-card-text>
                   임대차 계약서 작성시 이것만 알아두면 당신은 부동산의 왕!
@@ -37,7 +38,7 @@
                 img-top
                 tag="article"
                 style="max-width: 20rem;"
-                class="mb-2"
+                class="shadow-sm p-3 mb-5 bg-white rounded"
               >
                 <b-card-text>
                   이사를 준비한다면 필독!!! 이사 체크 리스트
@@ -61,7 +62,7 @@
                 img-top
                 tag="article"
                 style="max-width: 20rem;"
-                class="mb-2"
+                class="mb-2 shadow-sm p-3 mb-5 bg-white rounded"
               >
                 <b-card-text>
                   Happy house 와 함꼐 나에게 꼭 맞는 방을 찾는 방법!
