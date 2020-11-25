@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -72,11 +72,11 @@ export default {
   data() {
     return {
       user: null,
-      userid: "",
-      userpwd: "",
-      username: "",
-      email: "",
-      address: "",
+      userid: '',
+      userpwd: '',
+      username: '',
+      email: '',
+      address: '',
     };
   },
   methods: {
@@ -90,16 +90,16 @@ export default {
           address: this.address,
         })
         .then(() => {
-          alert("회원가입 완료");
+          alert('회원가입 완료');
           //정보변환
           this.moveMain();
         })
         .catch(() => {
-          alert("회원가입 처리시 에러가 발생했습니다.");
+          alert('회원가입 처리시 에러가 발생했습니다.');
         });
     },
     moveMain() {
-      this.$router.replace("/");
+      this.$router.replace('/');
     },
   },
 };
