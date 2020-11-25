@@ -21,11 +21,12 @@
 
           <b-navbar-nav class="ml-auto" v-if="getAccessToken">
             <b-nav-item
-              ><b-avatar variant="primary" v-text="getUserId.charAt(0).toUpperCase()"></b-avatar
+              ><router-link to="/me" class="loginout"><b-avatar variant="primary" v-text="getUserId.charAt(0).toUpperCase()"></b-avatar
               >{{ getUserName }}({{ getUserId }})님 환영합니다.
+              </router-link>
             </b-nav-item>
-            <b-nav-item><router-link to="/myPage">찜 목록</router-link></b-nav-item>
-            <b-nav-item><router-link to="/me">내정보보기</router-link></b-nav-item>
+            <b-nav-item><router-link to="/myPage" class="loginout">찜 목록</router-link></b-nav-item>
+            <b-nav-item><router-link to="/me" class="loginout">내정보보기</router-link></b-nav-item>
             <b-nav-item @click.prevent="onClickLogout" class="loginout">로그아웃</b-nav-item>
             <!-- <b-nav-item href="/me">내정보보기</b-nav-item>
             <b-nav-item href="/logout">로그아웃</b-nav-item> -->
