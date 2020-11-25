@@ -49,12 +49,42 @@
         >
       </span>
     </div>
+    <br />
+    <br />
+    <h3>
+      답변
+    </h3>
+    <hr />
+    <br />
+    <div v-if="getRoll == 'admin'">
+      <b-form-textarea
+        id="textarea-rows"
+        placeholder="답변을 입력해주세요."
+        rows="8"
+        v-model="reply"
+      ></b-form-textarea>
+      <br />
+      <button class="btn btn-outline-primary" style="margin-left: 15px" @click="updateReply">
+        답변등록
+      </button>
+    </div>
+    <div v-else>
+      <b-form-textarea
+        id="textarea-rows"
+        placeholder="답변을 입력해주세요."
+        rows="8"
+        disabled
+        v-model="reply"
+      ></b-form-textarea>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment';
+import axios from 'axios';
 import { mapGetters } from 'vuex';
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   name: 'detail',
   props: {
@@ -63,13 +93,32 @@ export default {
     title: { type: String },
     content: { type: String },
     regtime: { type: String },
+    reply: { type: String },
   },
   computed: {
-    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName']),
+    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName', 'getRoll']),
   },
   methods: {
     getFormatDate(regtime) {
       return moment(new Date(regtime)).format('YYYY.MM.DD HH:mm:ss');
+    },
+    updateReply: function() {
+      axios
+        .put(`${SERVER_URL}/api/board/${this.no}`, {
+          no: this.no,
+          writer: this.writer,
+          title: this.title,
+          content: this.content,
+          regtime: this.regtime,
+          reply: this.reply,
+        })
+        .then((response) => {
+          console.log(response.data);
+          alert('답글이 수정 되었습니다.');
+        })
+        .catch(() => {
+          alert('답글 수정 중, 에러가 발생했습니다.');
+        });
     },
   },
 };

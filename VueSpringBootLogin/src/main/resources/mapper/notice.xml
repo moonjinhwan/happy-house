@@ -2,33 +2,33 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssafy.vue.model.mapper.BoardDAO">
+<mapper namespace="com.ssafy.vue.model.mapper.NoticeDAO">
 
 	<!-- 게시글 전체 조회 -->
-	<select id="selectBoard" resultType="board">
+	<select id="selectBoard" resultType="notice">
 		select no, title, writer, content, regtime
-		  from vue_board 
+		  from notices 
 		 order by no desc
 	</select>
 	
 		<!-- 게시글 이름 조회 -->
-	<select id="selectBoardbyName" parameterType="String" resultType="board">
+	<select id="selectBoardbyName" parameterType="String" resultType="notice">
 		select no, title, writer, content, regtime
-		  from vue_board 
+		  from notices 
 		  where title like "%title%"
 		 order by no desc
 	</select>
 	
 	<!-- 게시글 상세 조회 -->
-	<select id="selectBoardByNo" resultType="board">
+	<select id="selectBoardByNo" resultType="notice">
 		select no, title, writer, content, regtime
-		  from vue_board 
+		  from notices 
 		 where no = #{no}
 	</select>
 
 	<!-- 게시글 등록 -->
-	<insert id="insertBoard" parameterType="board">
-		insert into vue_board(
+	<insert id="insertBoard" parameterType="notice">
+		insert into notices(
 			title, writer, content
 		) values (
 			#{title}, #{writer}, #{content}
@@ -36,8 +36,8 @@
 	</insert>
 	
 	<!-- 게시글 수정 -->
-	<update id="updateBoard" parameterType="board">
-		update vue_board 
+	<update id="updateBoard" parameterType="notice">
+		update notices 
 		   set title = #{title}, 
 		   	   writer = #{writer}, 
 		   	   content = #{content}
@@ -47,7 +47,7 @@
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
 		delete 
-		  from vue_board 
+		  from notices 
 		 where no = #{no}
 	</delete>
 
