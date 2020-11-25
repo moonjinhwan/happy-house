@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
@@ -83,7 +83,7 @@ export default {
         this.user = response.data.info;
       })
       .catch(() => {
-        this.$store.dispatch("LOGOUT").then(() => this.moveMain());
+        this.$store.dispatch('LOGOUT').then(() => this.moveMain());
       });
   },
   methods: {
@@ -97,27 +97,27 @@ export default {
           joindate: this.user.joindate,
         })
         .then(() => {
-          alert("수정 완료");
+          alert('수정 완료');
           //정보변환
           this.moveMain();
         })
         .catch(() => {
-          alert("수정 처리시 에러가 발생했습니다.");
+          alert('수정 처리시 에러가 발생했습니다.');
         });
     },
     del: function() {
       axios
         .delete(`${SERVER_URL}/user/${this.user.userid}`)
         .then(() => {
-          alert("삭제 완료");
+          alert('삭제 완료');
           this.moveMain();
         })
         .catch(() => {
-          alert("삭제 시 에러가 발생했습니다.");
+          alert('삭제 시 에러가 발생했습니다.');
         });
     },
     moveMain() {
-      this.$router.replace("/");
+      this.$router.replace('/');
     },
   },
 };

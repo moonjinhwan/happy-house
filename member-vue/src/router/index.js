@@ -92,7 +92,7 @@ const routes = [
     path: "/myPage",
     name: "myPage",
     component: MyPage,
-  }
+  },
 ];
 
 const router = new VueRouter({
