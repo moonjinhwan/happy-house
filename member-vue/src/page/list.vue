@@ -5,7 +5,12 @@
       <div v-if="items.length">
         <h3>Happy House는 항상 고객님을 우선시 생각합니다.</h3>
         <hr />
-        <br />
+        <div class="text-right">
+          <button class="btn btn-outline-primary" @click="movePage">
+            글쓰기
+          </button>
+        </div>
+        <br>
         <table class="table table-bordered table-condensed">
           <colgroup>
             <col :style="{ width: '5%' }" />
@@ -30,9 +35,6 @@
         </table>
       </div>
       <div v-else>글이 없습니다.</div>
-      <div class="text-right">
-        <button class="btn btn-outline-primary" @click="movePage">등록</button>
-      </div>
     </div>
   </div>
 </template>
