@@ -5,33 +5,40 @@
         <div style=" display: inline-block;">
           <h3>위치기반 검색 시스템</h3>
           <hr />
-          <h5 style="float: left; padding-top:2%">시도 :</h5>
+          <h5 style="float: left; padding-top:2%">시/도 :</h5>
           <b-form-select v-model="selecSido" @change="getgugun">
-            <option
-              v-for="(sido, index) in sidolist"
-              :value="sido.sido_code"
-              v-bind:key="index"
-            >
+            <template #first>
+              <b-form-select-option :value="null" disabled
+                >시/도 를 선택해주세요</b-form-select-option
+              >
+            </template>
+            <option v-for="(sido, index) in sidolist" :value="sido.sido_code" v-bind:key="index">
               {{ sido.sido_name }}
             </option>
           </b-form-select>
-          <h5 style="float: left; padding-top:2%">구군 :</h5>
+          <h5 style="float: left; padding-top:2%">구/군 :</h5>
           <b-form-select v-model="selectGugun" @change="getdong">
-            <option
+            <template #first>
+              <b-form-select-option :value="null" disabled
+                >구/군 을 선택해주세요</b-form-select-option
+              >
+            </template>
+            <b-form-select-option
               v-for="(gugun, index) in gugunlist"
               :value="gugun.gugun_code"
               v-bind:key="index"
             >
               {{ gugun.gugun_name }}
-            </option>
+            </b-form-select-option>
           </b-form-select>
-          <h5 style="float: left; padding-top:2%">읍면동 :</h5>
+          <h5 style="float: left; padding-top:2%">읍/면/동 :</h5>
           <b-form-select v-model="selectDong" @change="[getInfo(), getPlace()]">
-            <option
-              v-for="(dong, index) in donglist"
-              :value="dong.dong"
-              v-bind:key="index"
-            >
+            <template #first>
+              <b-form-select-option :value="null" disabled
+                >읍/면/동 을 선택해주세요</b-form-select-option
+              >
+            </template>
+            <option v-for="(dong, index) in donglist" :value="dong.dong" v-bind:key="index">
               {{ dong.dong }}
             </option>
           </b-form-select>
@@ -90,19 +97,19 @@
 </template>
 
 <script>
-import axios from "axios";
-import AptDetail from "./AptDetail.vue";
-import { mapGetters } from "vuex";
-import AptList from "../components/AptList";
+import axios from 'axios';
+import AptDetail from './AptDetail.vue';
+import { mapGetters } from 'vuex';
+import AptList from '../components/AptList';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   components: { AptDetail, AptList },
-  name: "GoogleMap",
+  name: 'GoogleMap',
   data() {
     return {
-      status: "",
-      selected: "",
+      status: '',
+      selected: '',
       // default to montreal to keep it simple
       // change this to whatever makes sense
 
@@ -114,23 +121,23 @@ export default {
       gugunlist: [],
       donglist: [],
       placelist: [],
-      selecSido: "",
-      selectGugun: "",
-      selectDong: "",
+      selecSido: null,
+      selectGugun: null,
+      selectDong: null,
       fields: [
-        { key: "placeName", label: "음식점명" },
-        { key: "dongname", label: "법정동" },
-        { key: "address", label: "주소" },
+        { key: 'placeName', label: '음식점명' },
+        { key: 'dongname', label: '법정동' },
+        { key: 'address', label: '주소' },
       ],
     };
   },
   computed: {
-    ...mapGetters(["getAptList"]),
+    ...mapGetters(['getAptList']),
   },
   created: function() {
     //초기화하기
-    this.$store.commit("APTLIST", []);
-    this.$store.commit("APTDETAIL", []);
+    this.$store.commit('APTLIST', []);
+    this.$store.commit('APTDETAIL', []);
     axios
       .get(`${SERVER_URL}/map/sido`)
       .then((response) => {
@@ -138,7 +145,7 @@ export default {
         console.log(this.sidolist);
       })
       .catch(() => {
-        alert("시도코드 에러가 발생했습니다.");
+        alert('시도코드 에러가 발생했습니다.');
       });
   },
 
@@ -178,7 +185,7 @@ export default {
           console.log(this.gugunlist);
         })
         .catch(() => {
-          alert("구군코드 에러가 발생했습니다.");
+          alert('구군코드 에러가 발생했습니다.');
         });
     },
     getdong: function() {
@@ -190,14 +197,14 @@ export default {
           console.log(this.donglist);
         })
         .catch(() => {
-          alert("동코드 에러가 발생했습니다.");
+          alert('동코드 에러가 발생했습니다.');
         });
     },
     getInfo: function() {
       axios
         .get(`${SERVER_URL}/map/houseinfo/${this.selectDong}`)
         .then((response) => {
-          this.$store.commit("APTLIST", response.data.houseInfo);
+          this.$store.commit('APTLIST', response.data.houseInfo);
           //경도 위도 받아서 마커 설정
           this.markers.splice(0);
           this.center = {
@@ -210,12 +217,12 @@ export default {
                 lat: parseFloat(response.data.houseInfo[i].lat),
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
-              icon: "house.ico",
+              icon: 'house.ico',
             });
           }
         })
         .catch(() => {
-          alert("아파트 리스트를 받는 중, 에러가 발생했습니다.");
+          alert('아파트 리스트를 받는 중, 에러가 발생했습니다.');
         });
     },
     getPlace: function() {
@@ -228,12 +235,12 @@ export default {
           this.placelist = response.data.placeInfo;
         })
         .catch(() => {
-          alert("상권정보를 받는 중, 에러가 발생했습니다.");
+          alert('상권정보를 받는 중, 에러가 발생했습니다.');
         });
     },
     select: function() {
-      let iconType = ["", "coffee.ico", "chicken.ico"];
-      if (this.status == "clicked") {
+      let iconType = ['', 'coffee.ico', 'chicken.ico'];
+      if (this.status == 'clicked') {
         for (let i = 0; i < this.placelist.length; i++) {
           console.log(iconType[this.placelist[i].type]);
           this.markers.push({
@@ -252,7 +259,7 @@ export default {
               lat: parseFloat(this.$store.state.aptList[i].lat),
               lng: parseFloat(this.$store.state.aptList[i].lng),
             },
-            icon: "house.ico",
+            icon: 'house.ico',
           });
         }
       }
