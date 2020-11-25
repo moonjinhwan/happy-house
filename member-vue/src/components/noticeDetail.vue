@@ -1,7 +1,7 @@
 <template>
   <div id="qna">
     <h3>
-      <strong>{{ writer }}</strong> 님의 "{{ title }}"
+      <strong>[공지 - {{ no }}]</strong> {{ title }}
     </h3>
     <hr />
     <br />

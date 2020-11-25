@@ -3,11 +3,11 @@
     <que />
     <div id="qna">
       <div v-if="items.length">
-        <h3>Happy House는 항상 고객님을 우선시 생각합니다.</h3>
+        <h3>새로운 공지사항을 꼭 열람하시고 숙지 바랍니다.</h3>
         <hr />
         <div class="text-right">
           <button class="btn btn-outline-primary" @click="movePage">
-            글쓰기
+            공지사항 추가
           </button>
         </div>
         <br />
@@ -34,7 +34,7 @@
           />
         </table>
       </div>
-      <div v-else>글이 없습니다.</div>
+      <div v-else>공지사항이 없습니다.</div>
     </div>
   </div>
 </template>
@@ -42,7 +42,7 @@
 <script>
 import http from "@/util/http-common";
 import ListRow from "@/components/noticeRow.vue";
-import que from "@/components/qna.vue";
+import que from '@/components/noticeboard.vue';
 
 export default {
   name: "list",

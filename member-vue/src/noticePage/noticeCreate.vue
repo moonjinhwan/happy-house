@@ -2,7 +2,7 @@
   <div>
     <que />
     <div id="qna">
-      <h3>질문은 명확히 해주시기 바랍니다.</h3>
+      <h3>이곳은 "관리자 계정"만 입장가능합니다.</h3>
       <hr />
       <br />
       <create-form type="create" />
@@ -12,7 +12,7 @@
 
 <script>
 import CreateForm from '@/components/noticeForm.vue';
-import que from '@/components/qna.vue';
+import que from '@/components/noticeboard.vue';
 
 export default {
   name: 'create',

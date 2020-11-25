@@ -16,7 +16,7 @@
 <script>
 import http from "@/util/http-common";
 import Detail from "@/components/noticeDetail.vue";
-import que from "@/components/qna.vue";
+import que from '@/components/noticeboard.vue';
 
 export default {
   name: "read",

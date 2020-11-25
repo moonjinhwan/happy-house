@@ -1,5 +1,6 @@
 <template>
   <div>
+  
     <div>
       시도 :
       <select v-model="selecSido" @change="getgugun">
@@ -31,10 +32,11 @@
       </b-form-checkbox>
     </div>
     <br />
+     <apt-list />
 
     <!-- 구글맵 출력 -->
-    <div>
-      <gmap-map :center="center" :zoom="14" style="width:100%;  height: 500px;">
+    <div style="padding-left: 2%; padding-right: 2%">
+      <gmap-map :center="center" :zoom="14" style="width:100%;  height: 700px;">
         <gmap-marker
           :key="index"
           v-for="(m, index) in markers"
@@ -46,12 +48,14 @@
     </div>
     <!-- 아파트 디테일 출력 -->
     <div class="row">
-      <div class="col">
-        <h1>실거래가 정보</h1>
+      <div class="col apttable">
+        <h2>실거래가 정보</h2>
+        <hr>
         <apt-detail />
       </div>
-      <div class="col">
-        <h1>상권 정보</h1>
+      <div class="col apttable">
+        <h2>상권 정보</h2>
+        <hr>
         <div>
           <b-table
             hover
@@ -71,9 +75,11 @@
 import axios from 'axios';
 import AptDetail from './AptDetail.vue';
 import { mapGetters } from 'vuex';
+import AptList from "../components/AptList";
+
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
-  components: { AptDetail },
+  components: { AptDetail, AptList },
   name: 'GoogleMap',
   data() {
     return {
@@ -236,3 +242,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.apttable{
+padding-top:3%;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-bottom:5%
+}
+  
+</style>

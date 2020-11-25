@@ -2,7 +2,7 @@
   <div>
     <que />
     <div id="qna">
-      <h3>이곳은 수정하는 곳입니다</h3>
+      <h3>공지사항 수정</h3>
       <hr />
       <br />
       <update-form type="update" />
@@ -12,7 +12,7 @@
 
 <script>
 import UpdateForm from "@/components/noticeForm.vue";
-import que from "@/components/qna.vue";
+import que from '@/components/noticeboard.vue';
 
 export default {
   name: "Modify",

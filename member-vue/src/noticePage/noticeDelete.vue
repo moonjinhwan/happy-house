@@ -7,7 +7,7 @@
 
 <script>
 import http from "@/util/http-common";
-import que from "@/components/qna.vue";
+import que from '@/components/noticeboard.vue';
 
 export default {
   name: "delete",

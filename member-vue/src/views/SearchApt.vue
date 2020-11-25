@@ -8,16 +8,14 @@
       <div class="container text-white">
         <h1 class="display-4">Search House</h1>
         <p class="lead">
-          HappyHouse에서는 보다 최신의 부동산 데이터를 제공하려 노력하고 있습니다.
+          HappyHouse에서는 보다 최신의 부동산 데이터를 제공하려 노력하고
+          있습니다.
         </p>
       </div>
       <!-- /.container -->
     </div>
 
-    <div class="container">
-      <h1>아파트 정보</h1>
-      <apt-list />
-    </div>
+    <div class="container"></div>
     <!-- google map 부분  -->
     <div id="app">
       <google-map />
@@ -27,15 +25,13 @@
 
 <script>
 import GoogleMap from "../components/GoogleMap";
-import AptList from "../components/AptList";
 
 export default {
   name: "App",
   components: {
     GoogleMap,
     // AptList,
-    AptList
-  }
+  },
 };
 </script>
 
