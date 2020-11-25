@@ -47,9 +47,10 @@ public class MyPageDto {
 	}
 	@Override
 	public String toString() {
-		return "MyPageDto ["+"userId=" + userId + ", aptName=" + aptName + ", dealAmount=" + dealAmount
-				+ ", dealYear=" + dealYear + ", dong=" + dong + ", buildYear="+ "]";
+		return "MyPageDto [userId=" + userId + ", aptName=" + aptName + ", dealAmount=" + dealAmount + ", dealYear="
+				+ dealYear + ", dong=" + dong + ", area=" + area + "]";
 	}
+	
 	
 	
 }
