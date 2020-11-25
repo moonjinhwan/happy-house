@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafy.vue.model.mapper.MemberMapper">
 
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
-		select username, userid, email, address, joindate
+		select username, userid, email, address, joindate, roll
 		from member
 		where userid = #{userid} and userpwd = #{userpwd}
 	</select>
@@ -44,4 +44,8 @@
 		from mypage
 		where userid=#{userid}
 	</select>
+	<delete id="deleteMyPage" parameterType="string">
+		delete from mypage
+		where no=#{no}
+	</delete>
 </mapper>

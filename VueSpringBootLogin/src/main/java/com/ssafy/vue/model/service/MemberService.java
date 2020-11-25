@@ -15,4 +15,5 @@ public interface MemberService {
 	boolean join(MemberDto memberDto) throws Exception;
 	boolean insertMyPage(MyPageDto myPageDto) throws Exception;
 	public List<MyPageDto> selectMyPage(String userid) throws Exception;
+	public boolean deleteMyPage(String no) throws Exception;
 }

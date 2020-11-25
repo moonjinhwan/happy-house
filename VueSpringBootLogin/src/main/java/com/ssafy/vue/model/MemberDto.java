@@ -7,7 +7,7 @@ public class MemberDto {
 	private String email;
 	private String address;
 	private String joindate;
-
+	private String roll;
 	public String getUserid() {
 		return userid;
 	}
@@ -55,10 +55,18 @@ public class MemberDto {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate;
 	}
+	
+	public String getRoll() {
+		return roll;
+	}
+
+	public void setRoll(String roll) {
+		this.roll = roll;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberDto [userid=" + userid + ", username=" + username + ", userpwd=" + userpwd + ", email=" + email
-				+ ", address=" + address + ", joindate=" + joindate + "]";
+				+ ", address=" + address + ", joindate=" + joindate + ", roll=" + roll + "]";
 	}
 }

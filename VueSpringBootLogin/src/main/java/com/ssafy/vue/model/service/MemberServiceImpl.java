@@ -60,4 +60,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<MyPageDto> selectMyPage(String userid) throws Exception {
 		return sqlSession.getMapper(MemberMapper.class).selectMyPage(userid);
 	}
+	
+	@Override
+	@Transactional
+	public boolean deleteMyPage(String no) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).deleteMyPage(no)==1;
+	}
 }

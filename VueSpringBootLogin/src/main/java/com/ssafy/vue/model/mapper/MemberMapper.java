@@ -18,4 +18,5 @@ public interface MemberMapper {
 	public int join(MemberDto memberDto) throws SQLException;
 	public int insertMyPage(MyPageDto myPageDto) throws SQLException;
 	public List<MyPageDto> selectMyPage(String userid) throws Exception;
+	public int deleteMyPage(String no) throws Exception;
 }

@@ -48,7 +48,6 @@ public class BoardController {
 		return new ResponseEntity<Board>(boardService.detailBoard(no), HttpStatus.OK);
 	}
 
-
 	@PostMapping
 	public ResponseEntity<String> writeBoard(@RequestBody Board board) {
 		logger.debug("writeBoard - 호출");
@@ -62,7 +61,7 @@ public class BoardController {
 	public ResponseEntity<String> updateBoard(@RequestBody Board board) {
 		logger.debug("updateBoard - 호출");
 		logger.debug("" + board);
-		
+		System.out.println(board.toString());
 		if (boardService.updateBoard(board)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}

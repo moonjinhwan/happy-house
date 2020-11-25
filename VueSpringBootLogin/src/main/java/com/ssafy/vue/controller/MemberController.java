@@ -50,6 +50,7 @@ public class MemberController {
 				resultMap.put("auth-token", token);
 				resultMap.put("user-id", loginUser.getUserid());
 				resultMap.put("user-name", loginUser.getUsername());
+				resultMap.put("user-roll", loginUser.getRoll());
 //				resultMap.put("status", true);
 //				resultMap.put("data", loginUser);
 				status = HttpStatus.ACCEPTED;
@@ -72,18 +73,12 @@ public class MemberController {
 		HttpStatus status = HttpStatus.ACCEPTED;
 		System.out.println(">>>>>> " + jwtService.get(req.getHeader("auth-token")));
 		try {
-			// 사용자에게 전달할 정보이다.
-			// String info = memberService.getServerInfo();
-			// MemberDto info = memberService.selectOne();
-
 			resultMap.putAll(jwtService.get(req.getHeader("auth-token")));
 
 			Map<String, Object> temp = (Map<String, Object>) resultMap.get("user");
 			MemberDto info = memberService.selectOne((String) temp.get("userid"));
 			resultMap.put("info", info);
 
-//			resultMap.put("status", true)
-//			resultMap.put("info", info);
 			status = HttpStatus.ACCEPTED;
 		} catch (RuntimeException e) {
 			logger.error("정보조회 실패 : {}", e);
@@ -112,8 +107,7 @@ public class MemberController {
 	// 삭제
 	@DeleteMapping("{id}")
 	public ResponseEntity<Map<String, Object>> deleteInfo(@PathVariable("id") String userid,
-			HttpServletResponse response, HttpServletRequest req) {
-		// System.out.println(userid);
+		HttpServletResponse response, HttpServletRequest req) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {
@@ -142,9 +136,9 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	//마이페이지 저장
 	@PostMapping("/mypage")
 	public ResponseEntity<Map<String, Object>> insertMyPage(@RequestBody MyPageDto myPageDto){
-		System.out.println(myPageDto.toString());
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {		
@@ -156,9 +150,9 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
+	//마이페이지 조회
 	@GetMapping("/mypage/{userid}")
 	public ResponseEntity<Map<String, Object>> selectMyPage(@PathVariable String userid){
-		System.out.println("우저 아이디 받아옴"+userid);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {		
@@ -167,6 +161,19 @@ public class MemberController {
 		}catch (Exception e) {
 			System.out.println("내 페이지 저장 실패");
 			resultMap.put("message", "내 페이지 저장 실패");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	//마이페이지 보기
+	@DeleteMapping("/mypage/{no}")
+	public ResponseEntity<Map<String, Object>> deleteMyPage(@PathVariable String no){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		try {
+			memberService.deleteMyPage(no);
+		} catch (Exception e) {
+			resultMap.put("message", "찜 목록 삭제");
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
