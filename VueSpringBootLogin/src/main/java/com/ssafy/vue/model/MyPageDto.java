@@ -6,6 +6,7 @@ public class MyPageDto {
 	private String dealAmount;
 	private String dealYear;
 	private String dong;
+	private String area;
 	
 	public String getUserId() {
 		return userId;
@@ -36,6 +37,13 @@ public class MyPageDto {
 	}
 	public void setDong(String dong) {
 		this.dong = dong;
+	}
+	
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	@Override
 	public String toString() {
