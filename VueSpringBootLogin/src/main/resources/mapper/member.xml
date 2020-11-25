@@ -24,7 +24,7 @@
 	<!-- 조인 -->
 	<insert id="join" parameterType="MemberDto">
 		insert into member(userid, username, userpwd, email, address)
-		values(#{userid}, #{username}, #{email},#{userpwd}, #{address});
+		values(#{userid}, #{username},#{userpwd}, #{email}, #{address});
 	</insert>
 	
 	<!-- 하나만 -->
@@ -35,8 +35,8 @@
 	</select>
 	
 	<insert id="insertMyPage" parameterType="MyPageDto">
-		insert into mypage(userId, aptName, dealAmount, dealYear, dong)
-		values(#{userId}, #{aptName}, #{dealAmount}, #{dealYear}, #{dong})
+		insert into mypage(userId, aptName, dealAmount, dealYear, dong, area)
+		values(#{userId}, #{aptName}, #{dealAmount}, #{dealYear}, #{dong}, #{area})
 	</insert>
 	
 	<select id="selectMyPage" parameterType="String" resultType="MyPageDto" >
