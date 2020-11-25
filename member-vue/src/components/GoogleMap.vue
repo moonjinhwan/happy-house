@@ -164,7 +164,7 @@ export default {
         .then((response) => {
           this.$store.commit('APTLIST', response.data.houseInfo);
           //경도 위도 받아서 마커 설정
-
+          this.markers.splice(0);
           this.center = {
             lat: parseFloat(response.data.houseInfo[0].lat),
             lng: parseFloat(response.data.houseInfo[0].lng),

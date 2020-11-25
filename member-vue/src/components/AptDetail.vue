@@ -31,6 +31,7 @@ export default {
             dealAmount: obj.dealAmount,
             dealYear: obj.dealYear,
             dong: obj.dong,
+            area: obj.area,
           })
           .then(() => {
             alert('내 페이지에 저장 되었어요');
