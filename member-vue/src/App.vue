@@ -25,6 +25,9 @@
           <router-link to="/list" class="loginout" style="padding-right: 30px"
             >QnA 게시판</router-link
           >
+           <router-link to="/noticeList" class="loginout" style="padding-right: 30px"
+            >공지사항</router-link
+          >
 
           <b-navbar-nav class="ml-auto" v-if="getAccessToken">
             <b-nav-item
