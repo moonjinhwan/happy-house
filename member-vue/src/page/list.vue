@@ -34,7 +34,9 @@
           />
         </table>
       </div>
-      <div v-else>글이 없습니다.</div>
+      <div v-else>글이 없습니다. <button style="float: right" v-if="getAccessToken" class="btn btn-outline-primary" @click="movePage">
+            글쓰기
+          </button></div>
     </div>
   </div>
 </template>
