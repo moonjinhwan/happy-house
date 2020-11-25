@@ -6,6 +6,7 @@
       head-variant="light"
       @row-clicked="mypage"
       hover
+      :fields="fields"
     ></b-table>
   </div>
 </template>
@@ -15,6 +16,17 @@ import axios from 'axios';
 import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
+  data() {
+    return {
+      fields: [
+        { key: 'AptName', label: '아파트명' },
+        { key: 'area', label: '면적' },
+        { key: 'dealAmount', label: '거래가' },
+        { key: 'dealYear', label: '거래년도' },
+        { key: 'dong', label: '법정동' },
+      ],
+    };
+  },
   computed: {
     ...mapGetters(['getAptDetail']),
   },
