@@ -36,7 +36,7 @@
           {{ data.item.area }}
         </template>
         <template #cell(del)="data">
-          <b-button size="sm" @click="delMyPage(data.item.no)" variant="danger" class="mr-2"
+          <b-button size="sm" @click="delMyPage(data.item.no)" variant="outline-danger" class="mr-2"
             >삭제
           </b-button>
         </template>

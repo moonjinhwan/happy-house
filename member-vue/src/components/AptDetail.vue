@@ -2,7 +2,7 @@
   <div>
     <b-table sticky-header :items="getAptDetail" head-variant="light" hover :fields="fields">
       <template #cell(pick)="data">
-        <b-button size="sm" class="mr-2" @click="mypage(data.item)">찜 </b-button>
+        <b-button size="sm" class="mr-2" variant="outline-success" @click="mypage(data.item)">찜 </b-button>
       </template>
     </b-table>
   </div>

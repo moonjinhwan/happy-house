@@ -6,7 +6,7 @@
           <h3>위치기반 검색 시스템</h3>
           <hr />
           <h5 style="float: left; padding-top:2%">시도 :</h5>
-          <b-form-select v-model="selecSido" @change="getgugun">
+          <b-form-select v-model="selecSido" @change="getgugun" title="시/도를 골라주세요!!">
             <option
               v-for="(sido, index) in sidolist"
               :value="sido.sido_code"
@@ -16,7 +16,7 @@
             </option>
           </b-form-select>
           <h5 style="float: left; padding-top:2%">구군 :</h5>
-          <b-form-select v-model="selectGugun" @change="getdong">
+          <b-form-select v-model="selectGugun" @change="getdong" title="구/군을 골라주세요!!">
             <option
               v-for="(gugun, index) in gugunlist"
               :value="gugun.gugun_code"
@@ -26,7 +26,7 @@
             </option>
           </b-form-select>
           <h5 style="float: left; padding-top:2%">읍면동 :</h5>
-          <b-form-select v-model="selectDong" @change="[getInfo(), getPlace()]">
+          <b-form-select v-model="selectDong" @change="[getInfo(), getPlace()]" title="읍/면/동을 골라주세요!!">
             <option
               v-for="(dong, index) in donglist"
               :value="dong.dong"
