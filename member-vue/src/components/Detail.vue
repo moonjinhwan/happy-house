@@ -36,24 +36,27 @@
           목록
         </button></router-link
       >
-      <router-link :to="'/modify?no=' + no"
-        ><button class="btn btn-outline-primary " style="margin-left: 15px">
-          수정
-        </button></router-link
-      >
-      <router-link :to="'/delete?no=' + no"
-        ><button class="btn btn-outline-danger" style="margin-left: 15px">
-          삭제
-        </button></router-link
-      >
+      <span v-if="writer === getUserId">
+        <router-link :to="'/modify?no=' + no"
+          ><button class="btn btn-outline-primary " style="margin-left: 15px">
+            수정
+          </button></router-link
+        >
+        <router-link :to="'/delete?no=' + no"
+          ><button class="btn btn-outline-danger" style="margin-left: 15px">
+            삭제
+          </button></router-link
+        >
+      </span>
     </div>
   </div>
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment';
+import { mapGetters } from 'vuex';
 export default {
-  name: "detail",
+  name: 'detail',
   props: {
     no: { type: Number },
     writer: { type: String },
@@ -61,9 +64,12 @@ export default {
     content: { type: String },
     regtime: { type: String },
   },
+  computed: {
+    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName']),
+  },
   methods: {
     getFormatDate(regtime) {
-      return moment(new Date(regtime)).format("YYYY.MM.DD HH:mm:ss");
+      return moment(new Date(regtime)).format('YYYY.MM.DD HH:mm:ss');
     },
   },
 };
