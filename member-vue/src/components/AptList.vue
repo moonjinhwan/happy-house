@@ -5,8 +5,10 @@
       :items="getAptList"
       head-variant="light"
       @row-clicked="aptDetail"
+      :fields="fields"
       hover
-    ></b-table>
+    >
+    </b-table>
   </section>
 </template>
 
@@ -15,6 +17,16 @@ import axios from 'axios';
 import { mapGetters, mapMutations } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
+  data() {
+    return {
+      fields: [
+        { key: 'aptName', label: '아파트명' },
+        { key: 'buildYear', label: '설립 년도' },
+        { key: 'dong', label: '법정동' },
+        { key: 'jibun', label: '지번' },
+      ],
+    };
+  },
   computed: {
     ...mapGetters(['getAptList']),
   },
@@ -30,7 +42,8 @@ export default {
           aptName: obj.aptName,
         })
         .then((response) => {
-          console.log(response);
+          console.log('디테일 인포');
+          console.log(response.data.detailInfo);
           this.setDetail(response.data.detailInfo);
         })
         .catch((error) => {

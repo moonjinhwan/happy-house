@@ -53,7 +53,13 @@
       <div class="col">
         <h1>상권 정보</h1>
         <div>
-          <b-table hover sticky-header :items="placelist" head-variant="light"></b-table>
+          <b-table
+            hover
+            sticky-header
+            :items="placelist"
+            head-variant="light"
+            :fields="fields"
+          ></b-table>
         </div>
         <!-- <place-detail /> -->
       </div>
@@ -87,6 +93,11 @@ export default {
       selecSido: '',
       selectGugun: '',
       selectDong: '',
+      fields: [
+        { key: 'placeName', label: '음식점명' },
+        { key: 'dongname', label: '법정동' },
+        { key: 'address', label: '주소' },
+      ],
     };
   },
   computed: {
