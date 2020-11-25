@@ -1,6 +1,7 @@
 package com.ssafy.vue.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.*;
@@ -155,5 +156,19 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
-	
+	@GetMapping("/mypage/{userid}")
+	public ResponseEntity<Map<String, Object>> selectMyPage(@PathVariable String userid){
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		try {		
+			List<MyPageDto> info=memberService.selectMyPage(userid);
+			resultMap.put("myPageInfo", info);
+		}catch (Exception e) {
+			System.out.println("내 페이지 저장 실패");
+			resultMap.put("message", "내 페이지 저장 실패");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
 }

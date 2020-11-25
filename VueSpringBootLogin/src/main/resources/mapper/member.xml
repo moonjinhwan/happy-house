@@ -38,4 +38,10 @@
 		insert into mypage(userId, aptName, dealAmount, dealYear, dong)
 		values(#{userId}, #{aptName}, #{dealAmount}, #{dealYear}, #{dong})
 	</insert>
+	
+	<select id="selectMyPage" resultType="MyPageDto" parameterType="String">
+		select *
+		from mypage
+		where userid=#{userid}
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.ssafy.vue.model.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +54,10 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public boolean insertMyPage(MyPageDto myPageDto) throws Exception {
 		return sqlSession.getMapper(MemberMapper.class).insertMyPage(myPageDto)==1;
+	}
+
+	@Override
+	public List<MyPageDto> selectMyPage(String userid) throws Exception {
+		return sqlSession.getMapper(MemberMapper.class).selectMyPage(userid);
 	}
 }
