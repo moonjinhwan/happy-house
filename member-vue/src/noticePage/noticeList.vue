@@ -5,7 +5,7 @@
       <div v-if="items.length">
         <h3>새로운 공지사항을 꼭 열람하시고 숙지 바랍니다.</h3>
         <hr />
-        <div class="text-right">
+        <div v-if="getRoll == 'admin'" class="text-right">
           <button class="btn btn-outline-primary" @click="movePage">
             공지사항 추가
           </button>
@@ -40,12 +40,13 @@
 </template>
 
 <script>
-import http from "@/util/http-common";
-import ListRow from "@/components/noticeRow.vue";
+import { mapGetters } from 'vuex';
+import http from '@/util/http-common';
+import ListRow from '@/components/noticeRow.vue';
 import que from '@/components/noticeboard.vue';
 
 export default {
-  name: "list",
+  name: 'list',
   components: {
     ListRow,
     que,
@@ -55,19 +56,22 @@ export default {
       items: [],
     };
   },
+  computed: {
+    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName', 'getRoll']),
+  },
   created() {
     http
-      .get("/notice")
+      .get('/notice')
       .then(({ data }) => {
         this.items = data;
       })
       .catch(() => {
-        alert("에러가 발생했습니다.");
+        alert('에러가 발생했습니다.');
       });
   },
   methods: {
     movePage() {
-      this.$router.push("/noticeCreate");
+      this.$router.push('/noticeCreate');
     },
   },
 };
