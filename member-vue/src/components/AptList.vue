@@ -1,11 +1,19 @@
 <template>
-  <section>
-    <b-table sticky-header :items="getAptList" head-variant="light" :fields="fields" hover>
-      <template #cell(pick)="data">
-        <b-button size="sm" class="mr-2" @click="aptDetail(data.item)">자세히 </b-button>
-      </template>
-    </b-table>
-  </section>
+  <div style="padding-left: 2%; padding-right: 2%">
+    <h2>아파트 정보</h2>
+    <h7 style="float:right;  text-decoration: underline;"
+      >* 해당 아파트를 클릭시 실거래가 정보를 확인할수 있습니다.</h7
+    >
+    <br />
+    <hr />
+    <section>
+      <b-table sticky-header :items="getAptList" head-variant="light" :fields="fields" hover>
+        <template #cell(pick)="data">
+          <b-button size="sm" class="mr-2" @click="aptDetail(data.item)">자세히 </b-button>
+        </template>
+      </b-table>
+    </section>
+  </div>
 </template>
 
 <script>
