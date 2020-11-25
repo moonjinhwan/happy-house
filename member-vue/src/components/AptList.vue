@@ -1,13 +1,9 @@
 <template>
   <section>
-    <b-table
-      sticky-header
-      :items="getAptList"
-      head-variant="light"
-      @row-clicked="aptDetail"
-      :fields="fields"
-      hover
-    >
+    <b-table sticky-header :items="getAptList" head-variant="light" :fields="fields" hover>
+      <template #cell(pick)="data">
+        <b-button size="sm" class="mr-2" @click="aptDetail(data.item)">자세히 </b-button>
+      </template>
     </b-table>
   </section>
 </template>
@@ -24,6 +20,7 @@ export default {
         { key: 'buildYear', label: '설립 년도' },
         { key: 'dong', label: '법정동' },
         { key: 'jibun', label: '지번' },
+        { key: 'pick', label: '' },
       ],
     };
   },

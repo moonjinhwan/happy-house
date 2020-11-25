@@ -1,13 +1,10 @@
 <template>
   <div>
-    <b-table
-      sticky-header
-      :items="getAptDetail"
-      head-variant="light"
-      @row-clicked="mypage"
-      hover
-      :fields="fields"
-    ></b-table>
+    <b-table sticky-header :items="getAptDetail" head-variant="light" hover :fields="fields">
+      <template #cell(pick)="data">
+        <b-button size="sm" class="mr-2" @click="mypage(data.item)">찜 </b-button>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -24,6 +21,7 @@ export default {
         { key: 'dealAmount', label: '거래가' },
         { key: 'dealYear', label: '거래년도' },
         { key: 'dong', label: '법정동' },
+        { key: 'pick', label: '' },
       ],
     };
   },

@@ -16,14 +16,7 @@
       <h2>예비 보금자리 리스트</h2>
       <hr />
       <br />
-      <b-table
-        sticky-header
-        head-variant="light"
-        striped
-        hover
-        :items="mypage"
-        :fields="fields"
-      >
+      <b-table sticky-header head-variant="light" striped hover :items="mypage" :fields="fields">
         <template #cell(userid)="data">
           {{ data.item.userId }}
         </template>
@@ -43,7 +36,7 @@
           {{ data.item.area }}
         </template>
         <template #cell(del)="data">
-          <b-button size="sm" @click="delMyPage(data.item.no)" class="mr-2"
+          <b-button size="sm" @click="delMyPage(data.item.no)" variant="danger" class="mr-2"
             >삭제
           </b-button>
         </template>
@@ -53,20 +46,20 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   data() {
     return {
       fields: [
-        { key: "userid", label: "아이디" },
-        { key: "aptName", label: "아파트 이름" },
-        { key: "dealAmount", label: "거래가" },
-        { key: "dealYear", label: "거래년도" },
-        { key: "dong", label: "동이름" },
-        { key: "area", label: "면적" },
-        { key: "del", label: "삭제" },
+        { key: 'userid', label: '아이디' },
+        { key: 'aptName', label: '아파트 이름' },
+        { key: 'dealAmount', label: '거래가' },
+        { key: 'dealYear', label: '거래년도' },
+        { key: 'dong', label: '동이름' },
+        { key: 'area', label: '면적' },
+        { key: 'del', label: '' },
       ],
       mypage: [],
     };
@@ -79,7 +72,7 @@ export default {
         this.mypage = response.data.myPageInfo;
       })
       .catch(() => {
-        alert("찜목록 불러오는 중, 에러가 발생했습니다.");
+        alert('찜목록 불러오는 중, 에러가 발생했습니다.');
       });
   },
   methods: {
@@ -87,11 +80,11 @@ export default {
       axios
         .delete(`${SERVER_URL}/user/mypage/${no}`)
         .then(() => {
-          alert("삭제 되었습니다.");
+          alert('삭제 되었습니다.');
           this.getList();
         })
         .catch(() => {
-          alert("삭제 중, 에러가 발생했습니다.");
+          alert('삭제 중, 에러가 발생했습니다.');
         });
     },
     getList: function() {
@@ -102,7 +95,7 @@ export default {
           this.mypage = response.data.myPageInfo;
         })
         .catch(() => {
-          alert("찜목록 불러오는 중, 에러가 발생했습니다.");
+          alert('찜목록 불러오는 중, 에러가 발생했습니다.');
         });
     },
   },
