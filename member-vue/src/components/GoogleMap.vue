@@ -5,7 +5,6 @@
         <div style=" display: inline-block;">
           <h3>위치기반 검색 시스템</h3>
           <hr />
-      
 
           <h5 style="float: left; padding-top:2%">시/도 :</h5>
           <b-form-select v-model="selecSido" @change="getgugun" title="시/도를 골라주세요!!">
@@ -34,16 +33,18 @@
             </b-form-select-option>
           </b-form-select>
 
-
           <h5 style="float: left; padding-top:2%">읍/면/동 :</h5>
-          <b-form-select v-model="selectDong" @change="[getInfo(), getPlace()]" title="읍/면/동을 골라주세요!!">
+          <b-form-select
+            v-model="selectDong"
+            @change="[getInfo(), getPlace()]"
+            title="읍/면/동을 골라주세요!!"
+          >
             <template #first>
               <b-form-select-option :value="null" disabled
                 >읍/면/동 을 선택해주세요</b-form-select-option
               >
             </template>
             <option v-for="(dong, index) in donglist" :value="dong.dong" v-bind:key="index">
-
               {{ dong.dong }}
             </option>
           </b-form-select>
@@ -71,9 +72,22 @@
           :key="index"
           v-for="(m, index) in markers"
           :position="m.position"
-          @click="center = m.position"
+          @click="openWindow(m)"
           :icon="m.icon"
         ></gmap-marker>
+        <gmap-info-window
+          @closeclick="window_open = false"
+          :opened="window_open"
+          :position="infowindow"
+          :options="{
+            pixelOffset: {
+              width: 0,
+              height: -35,
+            },
+          }"
+        >
+          {{ selectMsg }}
+        </gmap-info-window>
       </gmap-map>
     </div>
     <!-- 아파트 디테일 출력 -->
@@ -134,6 +148,10 @@ export default {
         { key: 'dongname', label: '법정동' },
         { key: 'address', label: '주소' },
       ],
+      info_marker: null,
+      infowindow: { lat: '', lng: '' },
+      window_open: false,
+      selectMsg: '',
     };
   },
   computed: {
@@ -159,6 +177,15 @@ export default {
   },
 
   methods: {
+    //작은 윈도우 오픈
+    openWindow(m) {
+      //alert('눌렀다');
+      console.log(m);
+      this.infowindow.lat = m.position.lat;
+      this.infowindow.lng = m.position.lng;
+      this.window_open = true;
+      this.selectMsg = m.msg;
+    },
     setPlace(place) {
       this.currentPlace = place;
     },
@@ -209,6 +236,8 @@ export default {
       axios
         .get(`${SERVER_URL}/map/houseinfo/${this.selectDong}`)
         .then((response) => {
+          console.log('하우스인포');
+          console.log(response.data.houseInfo);
           this.$store.commit('APTLIST', response.data.houseInfo);
           //경도 위도 받아서 마커 설정
           this.markers.splice(0);
@@ -223,6 +252,7 @@ export default {
                 lng: parseFloat(response.data.houseInfo[i].lng),
               },
               icon: 'house.ico',
+              msg: response.data.houseInfo[i].aptName,
             });
           }
         })
@@ -247,13 +277,15 @@ export default {
       let iconType = ['', 'coffee.ico', 'chicken.ico'];
       if (this.status == 'clicked') {
         for (let i = 0; i < this.placelist.length; i++) {
-          console.log(iconType[this.placelist[i].type]);
+          console.log('상권정보');
+          console.log(this.placelist);
           this.markers.push({
             position: {
               lat: parseFloat(this.placelist[i].lat),
               lng: parseFloat(this.placelist[i].lng),
             },
             icon: iconType[this.placelist[i].type],
+            msg: this.placelist[i].placeName,
           });
         }
       } else {
@@ -265,6 +297,7 @@ export default {
               lng: parseFloat(this.$store.state.aptList[i].lng),
             },
             icon: 'house.ico',
+            msg: this.$store.state.aptList[i].aptName,
           });
         }
       }
