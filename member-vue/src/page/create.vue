@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import CreateForm from "@/components/Form.vue";
-import que from "@/components/qna.vue";
+import CreateForm from '@/components/Form.vue';
+import que from '@/components/qna.vue';
 
 export default {
-  name: "create",
+  name: 'create',
   components: {
     CreateForm,
     que,
