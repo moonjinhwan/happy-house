@@ -6,11 +6,11 @@
         <h3>Happy House는 항상 고객님을 우선시 생각합니다.</h3>
         <hr />
         <div class="text-right">
-          <button class="btn btn-outline-primary" @click="movePage">
+          <button v-if="getAccessToken" class="btn btn-outline-primary" @click="movePage">
             글쓰기
           </button>
         </div>
-        <br>
+        <br />
         <table class="table table-bordered table-condensed">
           <colgroup>
             <col :style="{ width: '5%' }" />
@@ -40,12 +40,12 @@
 </template>
 
 <script>
-import http from "@/util/http-common";
-import ListRow from "@/components/Row.vue";
-import que from "@/components/qna.vue";
-
+import http from '@/util/http-common';
+import ListRow from '@/components/Row.vue';
+import que from '@/components/qna.vue';
+import { mapGetters } from 'vuex';
 export default {
-  name: "list",
+  name: 'list',
   components: {
     ListRow,
     que,
@@ -57,18 +57,21 @@ export default {
   },
   created() {
     http
-      .get("/board")
+      .get('/board')
       .then(({ data }) => {
         this.items = data;
       })
       .catch(() => {
-        alert("에러가 발생했습니다.");
+        alert('에러가 발생했습니다.');
       });
   },
   methods: {
     movePage() {
-      this.$router.push("/create");
+      this.$router.push('/create');
     },
+  },
+  computed: {
+    ...mapGetters(['getAccessToken', 'getUserId', 'getUserName']),
   },
 };
 </script>
