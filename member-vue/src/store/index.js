@@ -44,31 +44,31 @@ export default new Vuex.Store({
       state.userId = "";
       state.userName = "";
     },
-    APTLIST: function (state, payload) {
+    APTLIST: function(state, payload) {
       state.aptList = payload;
     },
-    DONGCODE: function (state, payload) {
+    DONGCODE: function(state, payload) {
       state.dongCode = payload;
     },
     APTDETAIL: function(state, payload) {
       state.aptDetail = payload;
-    }
+    },
   },
   actions: {
     LOGIN(context, user) {
       return axios
         .post(`${SERVER_URL}/user/confirm/login`, user)
         .then((response) => {
-          context.commit("LOGIN", response.data);//데이터를 받고 초기화과정
+          context.commit("LOGIN", response.data); //데이터를 받고 초기화과정
           axios.defaults.headers.common[
             "auth-token"
-          ] = `${response.data["auth-token"] }`;
+          ] = `${response.data["auth-token"]}`;
         });
     },
     LOGOUT(context) {
       context.commit("LOGOUT");
       axios.defaults.headers.common["auth-token"] = undefined;
-    }
+    },
   },
-  modules: {}
+  modules: {},
 });

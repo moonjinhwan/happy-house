@@ -10,7 +10,7 @@
             글쓰기
           </button>
         </div>
-        <br>
+        <br />
         <table class="table table-bordered table-condensed">
           <colgroup>
             <col :style="{ width: '5%' }" />
