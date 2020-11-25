@@ -88,8 +88,14 @@
           <h4 style="display: inline-block; float: left;">
             <strong>공지사항</strong>
           </h4>
-          <button class="btn btn-outline-info btn-sm " style="float: right;">
-            더보기
+          <button class="btn btn-outline-info btn-sm" style="float: right;">
+            <router-link
+              to="/noticeList"
+              style="color: green ;"
+              onmouseover="this.style.color='white';"
+              onmouseout="this.style.color='green';"
+              >더보기</router-link
+            >
           </button>
           <br />
         </div>
@@ -97,54 +103,14 @@
         <hr />
 
         <ul class="list-group notilist">
-          <a
-            href="http://blog.naver.com/zigbang/222066167555"
-            target="_blank"
-            class="list-group-item list-group-item-action"
-            data-toggle="tooltip"
-            title="[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내"
-            >[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내</a
-          >
-          <a
-            href="http://blog.naver.com/zigbang/222066167555"
-            target="_blank"
-            class="list-group-item list-group-item-action"
-            data-toggle="tooltip"
-            title="[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내"
-            >[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내</a
-          >
-          <a
-            href="http://blog.naver.com/zigbang/222066167555"
-            target="_blank"
-            class="list-group-item list-group-item-action"
-            data-toggle="tooltip"
-            title="[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내"
-            >[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내</a
-          >
-          <a
-            href="http://blog.naver.com/zigbang/222066167555"
-            target="_blank"
-            class="list-group-item list-group-item-action"
-            data-toggle="tooltip"
-            title="[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내"
-            >[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내</a
-          >
-          <a
-            href="http://blog.naver.com/zigbang/222066167555"
-            target="_blank"
-            class="list-group-item list-group-item-action"
-            data-toggle="tooltip"
-            title="[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내"
-            >[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내</a
-          >
-          <a
-            href="http://blog.naver.com/zigbang/222066167555"
-            target="_blank"
-            class="list-group-item list-group-item-action"
-            data-toggle="tooltip"
-            title="[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내"
-            >[공지] HappyHouse 개인정보처리방침(2020/08/27) 개정 안내</a
-          >
+          <list-row
+            v-for="(item, index) in items.slice(0,6)"
+            :key="`${index}_items`"
+            :no="item.no"
+            :title="item.title"
+            :writer="item.writer"
+            :regtime="item.regtime"
+          />
         </ul>
       </div>
     </div>
@@ -152,8 +118,29 @@
 </template>
 
 <script>
+import ListRow from "@/components/mainNoticeRow.vue";
+import http from "@/util/http-common";
+
 export default {
   name: "Main",
+  components: {
+    ListRow,
+  },
+  data: function() {
+    return {
+      items: [],
+    };
+  },
+  created() {
+    http
+      .get("/notice")
+      .then(({ data }) => {
+        this.items = data;
+      })
+      .catch(() => {
+        alert("에러가 발생했습니다.");
+      });
+  },
   props: {
     msg: String,
   },

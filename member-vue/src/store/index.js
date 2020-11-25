@@ -11,6 +11,7 @@ export default new Vuex.Store({
     accessToken: null,
     userId: "",
     userName: "",
+    roll:"",
     aptList: [],
     dongCode: "",
     aptDetail: "",
@@ -31,18 +32,24 @@ export default new Vuex.Store({
     getAptDetail(state) {
       return state.aptDetail;
     },
+    getRoll(state) {
+      return state.roll;
+    }
   },
   mutations: {
     LOGIN(state, payload) {
-      //console.log(payload);
+      console.log('페이로드');
+      console.log(payload);
       state.accessToken = payload["auth-token"];
       state.userId = payload["user-id"];
       state.userName = payload["user-name"];
+      state.roll = payload["user-roll"];
     },
     LOGOUT(state) {
       state.accessToken = null;
       state.userId = "";
       state.userName = "";
+      state.roll = "";
     },
     APTLIST: function(state, payload) {
       state.aptList = payload;

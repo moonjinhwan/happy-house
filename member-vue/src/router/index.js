@@ -10,9 +10,14 @@ import SearchApt from "../views/SearchApt.vue";
 import List from "@/page/list.vue";
 import Create from "@/page/create.vue";
 import Read from "@/page/read.vue";
-import Modify  from "@/page/modify.vue";
+import Modify from "@/page/modify.vue";
 import Delete from "@/page/delete.vue";
-import MyPage from "@/views/MyPage.vue"
+import MyPage from "@/views/MyPage.vue";
+import NoticeList from "@/noticePage/noticeList.vue";
+import NoticeCreate from "@/noticePage/noticeCreate.vue";
+import NoticeRead from "@/noticePage/noticeRead.vue";
+import NoticeModify from "@/noticePage/noticeModify.vue";
+import NoticeDelete from "@/noticePage/noticeDelete.vue";
 // import { join } from "core-js/fn/array";
 
 Vue.use(VueRouter);
@@ -30,38 +35,38 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
   {
     path: "/login/:nextRoute",
     name: "LoginNextRoute",
-    component: Login
+    component: Login,
   },
   {
     path: "/update",
     name: "update",
-    component: Update
+    component: Update,
   },
   {
     path: "/me",
     name: "Me",
     component: Me,
-    beforeEnter: requireAuth()
+    beforeEnter: requireAuth(),
   },
   {
     path: "/join",
     name: "Join",
-    component: Join
+    component: Join,
   },
   {
     path: "/searchApt",
     name: "searchApt",
-    component: SearchApt
+    component: SearchApt,
   },
   {
     path: "/list",
@@ -92,13 +97,38 @@ const routes = [
     path: "/myPage",
     name: "myPage",
     component: MyPage,
-  }
+  },
+  {
+    path: "/noticeList",
+    name: "noticeList",
+    component: NoticeList,
+  },
+  {
+    path: "/noticeCreate",
+    name: "noticeCreate",
+    component: NoticeCreate,
+  },
+  {
+    path: "/noticeRead",
+    name: "noticeRead",
+    component: NoticeRead,
+  },
+  {
+    path: "/noticeModify",
+    name: "noticeModify",
+    component: NoticeModify,
+  },
+  {
+    path: "/noticeDelete",
+    name: "noticeDelete",
+    component: NoticeDelete,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
