@@ -158,7 +158,7 @@ public class MemberController {
 	}
 	@GetMapping("/mypage/{userid}")
 	public ResponseEntity<Map<String, Object>> selectMyPage(@PathVariable String userid){
-		
+		System.out.println("우저 아이디 받아옴"+userid);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		try {		
