@@ -109,11 +109,11 @@ export default {
       axios
         .delete(`${SERVER_URL}/user/${this.user.userid}`)
         .then(() => {
-          alert('삭제 완료');
-          this.moveMain();
+          alert('회원탈퇴 완료');
+          this.$store.dispatch('LOGOUT').then(() => this.$router.replace('/').catch(() => {}));
         })
         .catch(() => {
-          alert('삭제 시 에러가 발생했습니다.');
+          alert('회원탈퇴 시 에러가 발생했습니다.');
         });
     },
     moveMain() {
